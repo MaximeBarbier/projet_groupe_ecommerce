@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.handler.MatchableHandlerMapping;
 
 import com.intiformation.gestion.commerce.bean.Categorie;
 import com.intiformation.gestion.commerce.bean.Client;
