@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	<!--========================================================================== -->
+	<!--====== DETECTION DES ANNOTATIONS DES TRANSACTIONS ex : @Transactionnal === -->
+	<!--========================================================================== -->
+	<tx:annotation-driven transaction-manager="transactionManagerBean" />
+
+	<!--============================================================== -->
+	<!--====== ACTIVER LA DETECTION DES ANNOTATIONS ex : @Autowired === -->
+	<!--=============================================================== -->
+	<context:annotation-config />
+
+	<!--============================================================== -->
+	<!--====== ACTIVER LA DETECTION AUTO DES BEANS (COMPOSANTS) ======= -->
+	<!--=============================================================== -->
+	<context:component-scan base-package="com.intiformation" />
+
+	<!--==================================================================================== -->
+	<!--==      declaration du bean de la fabrique de gestionnaires d’entités (EMF)      === -->
+	<!--==================================================================================== -->
+	<bean id="entityManagerFactoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+
+		<!-- 1. injection du bean de la data source -->
+		<property name="dataSource" ref="datasourceBean" />
+
+		<!-- 2. définition du provider (ici Hibernate) -->
+		<property name="jpaVendorAdapter">
+		
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" />
+				<property name="showSql" value="true" />
+				
+			</bean>
+
+		</property>
+
+		<!-- 3. propriétés JPA -->
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.hibernate.dialect}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${jdbc.hibernate.hbm2ddl}</prop>
+				<prop key="hibernate.show_sql">${jdbc.hibernate.show_sql}</prop>
+			</props>
+		</property>
+		
+		<!-- 4. les classes annotés  -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.intiformation.gestion.commerce.bean</value>
+			</list>
+		</property>
+		
+	</bean>
+
+	<!--=========================================================================== -->
+	<!--============ declaration d'un gestionnaire de transactions =============== -->
+	<!--=========================================================================== -->
+	<bean id="transactionManagerBean" class="org.springframework.orm.jpa.JpaTransactionManager">
+	
+		<property name="entityManagerFactory" ref="entityManagerFactoryBean" />
+		
+	</bean>
+
+
+</beans>
