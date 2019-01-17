@@ -31,19 +31,19 @@
 		</div>
 	
 		<div style="border: 1px black; width: 75%; text-align: center; float: left;">
-			<form:form method="post" modelAttribute="">
+			<form:form method="post" modelAttribute="...." action="${pageContext.request.contextPath}/...">
 				<table>
 					<tr>
 						<td> ID Categorie :</td>
-						<td><form:hidden  path="" /></td>
+						<td><form:hidden  path="idCategorie" /></td>
 					</tr>					
 					<tr>
 						<td>Nom Categorie :</td>
-						<td><form:input path=""/></td>
+						<td><form:input path="nomCategorie"/></td>
 					</tr>					
 					<tr>
 						<td>Description :</td>
-						<td><form:textarea path=""/></td>
+						<td><form:textarea path="description"/></td>
 					</tr>					
 					<tr>
 						<td>Photo :</td>
@@ -67,17 +67,17 @@
 					<th></th>
 				</tr>
 				
-				<c:forEach items="${........}" var="cat">
+				<c:forEach items="${categoriesAttribute}" var="cat">
 					<tr>
-						<td>${cat. }</td>
-						<td>${ }</td>
-						<td>${ }</td>
-						<td>${ }</td>
+						<td>${cat.idCategorie}</td>
+						<td>${cat.nomCategorie}</td>
+						<td>${cat.description}</td>
+						<td>${cat.photo}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/......./delete${fonct.id}">Supprimer</a>
+							<a href="${pageContext.request.contextPath}/deleteCategorie${cat.idProduit}">Supprimer</a>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/....../edit/${fonct.id}">Editer</a>
+							<a href="${pageContext.request.contextPath}/edit${cat.idProduit}">Editer</a>
 						</td>	
 					</tr>
 				</c:forEach>	

@@ -41,16 +41,16 @@
 			</s:authorize>
 		
 			<!-- Formulaire d'ajout de produit -->
-			<form:form method="post" modelAttribute="">
+			<form:form method="post" modelAttribute="prod" action="${pageContext.request.contextPath}/save">
 				<table>
 					<tr>
 						<td> ID Produit :</td>
-						<td><form:hidden  path="" /></td>
+						<td><form:hidden  path="idProduit" /></td>
 					</tr>
 					<tr>
 						<td>Categories</td>			
 						<td> 
-							<form:select path="fonction">
+							<form:select path="categorie">
 								<form:option value="NONE" label="-------- Select --------"/>
 								<form:options items="${ListeCategorie}"/>
 							</form:select> 
@@ -103,14 +103,14 @@
 					
 				</tr>
 				
-				<c:forEach items="${........}" var="prod">
+				<c:forEach items="${produitsAttribute}" var="prod">
 					<tr>
-						<td>${prod. }</td>
-						<td>${ }</td>
-						<td>${ }</td>
-						<td>${ }</td>
-						<td>${ }</td>
-						<td>${ }</td>
+						<td>${prod.idProduit}</td>
+						<td>${prod.designation}</td>
+						<td>${prod.prix}</td>
+						<td>${prod.selectionne}</td>
+						<td>${prod.quantite}</td>
+						<td>${prod.photo}</td>
 						<td>
 							<a href="${pageContext.request.contextPath}/......./delete${fonct.id}">Supprimer</a>
 						</td>
