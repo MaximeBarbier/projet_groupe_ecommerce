@@ -17,11 +17,17 @@
 
 
 
-	<header>
+	<header style="">
 		
 		<div>
 			<img src="/images/panier.jpg">
 			
+				<form:form action="${pageContext.request.contextPath}/....." >
+					<form:input path=""/>
+					<input type="submit" name="Rechercher">
+				</form:form>
+				
+				
 		</div>
 		
 		<div>
@@ -105,10 +111,6 @@
 					</tr>
 					<tr>
 						<td>Prix :</td>
-						<td><form:outputText path=""/></td>
-					</tr>
-					<tr>
-						<td>Stock :</td>
 						<td><form:outputText path=""/></td>
 					</tr>
 					<tr>
