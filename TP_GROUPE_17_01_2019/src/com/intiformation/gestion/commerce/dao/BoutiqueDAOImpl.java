@@ -10,6 +10,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.handler.MatchableHandlerMapping;
 
+import com.intiformation.gestion.commerce.bean.Categorie;
+import com.intiformation.gestion.commerce.bean.Client;
+import com.intiformation.gestion.commerce.bean.Commande;
+import com.intiformation.gestion.commerce.bean.Panier;
+import com.intiformation.gestion.commerce.bean.Produit;
+import com.intiformation.gestion.commerce.bean.Role;
+import com.intiformation.gestion.commerce.bean.User;
+
 @Repository
 public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	
@@ -36,7 +44,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 		query.setParameter(1, c.getNomCategorie());
 		
 		//Récupération et retour de l'ID
-		Long idCategorie = query.getSingleResult();
+		Long idCategorie = (Long) query.getSingleResult();
 		return idCategorie;	  
 	}
 
@@ -85,7 +93,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 		//On récupère le produit qu'on vient d'ajouter dans la BDD et qui vient de recup un ID par auto 		increment
 		Query query = em.createQuery("SELECT p.idProduit FROM produit p WHERE p.designation = ?1");
 		query.setParameter(1, p.getDesignation());
-		Long idProduit = query.getSingleResult();
+		Long idProduit = (Long) query.getSingleResult();
 		return idProduit;	  
 	}
 
@@ -116,8 +124,6 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 		Query query = em.createQuery("SELECT p FROM produit p WHERE p.categorie.idCategorie = ?1");
 		query.setParameter(1, idCat);
 		return query.getResultList();
-		
-		return null;
 	}
 
 	@Override
@@ -141,7 +147,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	public void supprimerProduit(Long idP) {
 		
 		Produit prod = this.getProduit(idP);
-		em.remove(cat);	
+		em.remove(prod);	
 	}
 
 	@Override
@@ -166,7 +172,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 		User user = em.find(User.class, userID);
 		
 		//Changement du role du user
-		user.setRole(r);
+		r.setUser(user);
 		
 		//Modif dans la BDD
 		em.merge(user);
@@ -174,7 +180,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 
 	@Override
 	@Transactional
-	public Commande enregistrerCommande(GestionPanier p, Client c) {
+	public Commande enregistrerCommande(Panier p, Client c) {
 		return null;
 	}
 

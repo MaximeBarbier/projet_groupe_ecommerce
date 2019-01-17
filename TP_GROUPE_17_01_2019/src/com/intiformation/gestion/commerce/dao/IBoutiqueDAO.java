@@ -2,6 +2,14 @@ package com.intiformation.gestion.commerce.dao;
 
 import java.util.List;
 
+import com.intiformation.gestion.commerce.bean.Categorie;
+import com.intiformation.gestion.commerce.bean.Client;
+import com.intiformation.gestion.commerce.bean.Commande;
+import com.intiformation.gestion.commerce.bean.Panier;
+import com.intiformation.gestion.commerce.bean.Produit;
+import com.intiformation.gestion.commerce.bean.Role;
+import com.intiformation.gestion.commerce.bean.User;
+
 public interface IBoutiqueDAO {
 	
 	public Long ajouterCategorie(Categorie c);
@@ -34,7 +42,7 @@ public interface IBoutiqueDAO {
 	
 	public void attribuerRole(Role r, Long userID);
 	
-	public Commande enregistrerCommande(GestionPanier p, Client c);
+	public Commande enregistrerCommande(Panier p, Client c);
 	
 
 }
