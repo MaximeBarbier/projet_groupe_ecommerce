@@ -9,7 +9,7 @@
 <body>
 	<h1>HAHAHAHAH</h1>
 	
-	<a href="categorie">lien vers la page categorie</a>
+	<a href="listCategories">lien vers la page categorie</a>
 	
 </body>
 </html>
