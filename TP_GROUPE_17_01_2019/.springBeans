@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.9.5.201807030714-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.9.4.201804120850-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -10,6 +10,8 @@
 		<config>WebContent/WEB-INF/eCommerce-servlet.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>WebContent/WEB-INF/applicationContext-datasource.xml</config>
+		<config>WebContent/WEB-INF/applicationContext-jpa.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
