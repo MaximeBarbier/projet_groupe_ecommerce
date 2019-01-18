@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.intiformation.gestion.commerce.bean.Categorie;
 import com.intiformation.gestion.commerce.bean.Client;
 import com.intiformation.gestion.commerce.bean.Commande;
+import com.intiformation.gestion.commerce.bean.LigneCommande;
 import com.intiformation.gestion.commerce.bean.Panier;
 import com.intiformation.gestion.commerce.bean.Produit;
 import com.intiformation.gestion.commerce.bean.Role;
@@ -26,6 +27,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	private EntityManager em;
 	
 
+	
 	@Override
 	@Transactional
 	public Long ajouterCategorie(Categorie c) {
@@ -118,6 +120,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 		Query query = em.createQuery("SELECT p FROM produit p WHERE p.categorie.idCategorie = ?1");
 		query.setParameter(1, idCat);
 		return query.getResultList();
+		
 	}
 
 	@Override
@@ -175,7 +178,17 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	@Override
 	@Transactional
 	public Commande enregistrerCommande(Panier p, Client c) {
-		return null;
+	
+	em.persist(c);
+	Commande  commande=new Commande();
+	commande.setClient(c);
+	commande.setLigneCommandes(p.getArticle());
+	
+	em.persist(commande);	
+	return commande;	
+			
+		
+		
 	}
 
 }

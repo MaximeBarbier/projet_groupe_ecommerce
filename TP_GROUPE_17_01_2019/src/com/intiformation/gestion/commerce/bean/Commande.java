@@ -3,6 +3,7 @@ package com.intiformation.gestion.commerce.bean;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -81,8 +82,8 @@ public class Commande {
 		return ligneCommandes;
 	}
 
-	public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
-		this.ligneCommandes = ligneCommandes;
+	public void setLigneCommandes(Map<Long, LigneCommande> map) {
+		this.ligneCommandes = (List<LigneCommande>) map;
 	}
 
 	
