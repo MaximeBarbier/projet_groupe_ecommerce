@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,24 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.intiformation.gestion.commerce.bean.Categorie;
-import com.intiformation.gestion.commerce.dao.BoutiqueDAOImpl;
-import com.intiformation.gestion.commerce.metier.EBoutiqueMetierImpl;
 import com.intiformation.gestion.commerce.metier.IAdminCategoriesMetier;
-import com.intiformation.springmvc.entity.Fonctionnaire;
 
 @Controller
 @RequestMapping("/categorie")
 public class AdminCategoriesController {
 	
 	@Autowired
-	private IAdminCategoriesMetier iAdminCategoriesMetier;
-	
-	
+	private IAdminCategoriesMetier adminCategorie;
 			
 	// ctor chargé pour injection de spring				
-	public AdminCategoriesController(IAdminCategoriesMetier iAdminCategoriesMetier) {
+	public AdminCategoriesController(IAdminCategoriesMetier adminCategorie) {
 		super();
-		this.iAdminCategoriesMetier = iAdminCategoriesMetier;
+		this.adminCategorie = adminCategorie;
 	}
 
 
@@ -45,7 +39,7 @@ public class AdminCategoriesController {
 
 	// Création de la liste des categories 
 	List<Categorie> listeCategories = Collections.emptyList();		
-	listeCategories = iAdminCategoriesMetier.getListCategories();  
+	listeCategories = adminCategorie.getListCategories();  
 	model.addAttribute("categoriesAttribute", listeCategories);
 
 	// nom de la vue : index | résolution : WEB-INF/views/categories.jsp
@@ -64,8 +58,8 @@ public class AdminCategoriesController {
 	public void suppCat(@RequestParam(required=true, value="idcat") Long idcat, Model model)  {
 		
 		//Categorie categorie = iAdminCategoriesMetier.getCategorie(idcat); Pas sûre d'en avoir besoin
-		iAdminCategoriesMetier.deleteCategorie(idcat);    
-		model.addAttribute("categoriesAttribute", iAdminCategoriesMetier.getListCategories());
+		adminCategorie.deleteCategorie(idcat);    
+		model.addAttribute("categoriesAttribute", adminCategorie.getListCategories());
 		
 		//return "redirect:/index";
 	}	
@@ -73,7 +67,7 @@ public class AdminCategoriesController {
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String saveCat(@ModelAttribute("cat") Categorie cat ) {
 		
-		iAdminCategoriesMetier.addCategorie(cat);
+		adminCategorie.addCategorie(cat);
 		
 		return "redirect:/index";
 		
@@ -89,9 +83,9 @@ public class AdminCategoriesController {
 	public String editCat(@RequestParam(required=true, value="cat") Categorie cat, Model model) {
 		
 		// Recup de la categorie par l'id
-		iAdminCategoriesMetier.editCategorie(cat);
+		adminCategorie.editCategorie(cat);
 		
-		model.addAttribute("categoriesAttribute", iAdminCategoriesMetier.getListCategories());
+		model.addAttribute("categoriesAttribute", adminCategorie.getListCategories());
 		
 		return "redirect:/index";
 		
@@ -121,7 +115,7 @@ public class AdminCategoriesController {
     							@Validated Categorie pcategorie) {
 		
 		//ajout d'une categorie
-		iAdminCategoriesMetier.addCategorie(pcategorie);
+		adminCategorie.addCategorie(pcategorie);
 
 
 		return "categories";
