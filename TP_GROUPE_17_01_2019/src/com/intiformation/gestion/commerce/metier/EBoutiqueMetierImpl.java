@@ -14,7 +14,7 @@ import com.intiformation.gestion.commerce.bean.Role;
 import com.intiformation.gestion.commerce.bean.User;
 import com.intiformation.gestion.commerce.dao.IBoutiqueDAO;
 
-@Service
+@Service("serviceBean")
 public class EBoutiqueMetierImpl implements IAdminCategoriesMetier{
 	
 	@Autowired
