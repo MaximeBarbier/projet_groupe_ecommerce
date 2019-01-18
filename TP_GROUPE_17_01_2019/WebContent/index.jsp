@@ -9,7 +9,7 @@
 <body>
 	<h1>HAHAHAHAH</h1>
 	
-	<a href="listCategories">lien vers la page categorie</a>
+	<% response.sendRedirect("/listCategories"); %>
 	
 </body>
 </html>

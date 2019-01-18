@@ -16,7 +16,7 @@
 					/WEB-INF/applicationContext-datasource.xml
 					/WEB-INF/applicationContext-jpa.xml
 					/WEB-INF/eCommerce-servlet.xml
-					/WEB-INF/applicationContext-security.xml
+				
 					
 		</param-value>
 	</context-param>
@@ -41,6 +41,6 @@
   
   
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>categories.jsp</welcome-file>
   </welcome-file-list>
 </web-app>
