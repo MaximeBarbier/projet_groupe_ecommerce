@@ -64,7 +64,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	@Transactional
 	public void supprimerCategorie(Long idcat) {
 		
-		Categorie cat = this.getCategorie(idcat);
+		Categorie cat = em.find(Categorie.class, idcat);
 		em.remove(cat);
 	}
 
