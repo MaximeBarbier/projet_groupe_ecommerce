@@ -3,6 +3,7 @@ package com.intiformation.gestion.commerce.controller;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,15 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.intiformation.gestion.commerce.metier.EBoutiqueMetierImpl;
 import com.intiformation.gestion.commerce.metier.IAdminProduitMetier;
-import com.intiformation.modele.Categorie;
-import com.intiformation.modele.Produit;
+import com.intiformation.gestion.commerce.bean.Categorie;
+import com.intiformation.gestion.commerce.bean.Produit;
 
 @Controller
 @RequestMapping("/produits")
 public class AdminProduitsController {
 
 	// Recup IAdminProduitMetier
+	@Autowired
 	private IAdminProduitMetier iAdminProduitMetier;
 
 	// ctor chargé pour injection spring
@@ -37,7 +40,7 @@ public class AdminProduitsController {
 		
 		// Création de la liste des produits 
 		List<Produit> listeProduits = Collections.emptyList();		
-		listeProduits = dao.listproduits();
+		listeProduits = iAdminProduitMetier.getListproduits();
 		model.addAttribute("produitsAttribute", listeProduits);
 		
 		// nom de la vue : index | résolution : WEB-INF/views/index.jsp
@@ -54,7 +57,7 @@ public class AdminProduitsController {
 	public String saveProd(@ModelAttribute("prod") Produit prod,
 							@ModelAttribute("idcat") Long idCat) {
 		
-		iAdminProduitMetier.ajouterProduit(prod, idCat);
+		iAdminProduitMetier.addProduit(prod, idCat);
 		
 		return "redirect:/index";
 		
@@ -69,8 +72,8 @@ public class AdminProduitsController {
 	public String suppProd(@RequestParam(required=true, value="idProduit") Long idProduit, Model model) {
 		
 		//Categorie categorie = iAdminProduitsMetier.getProduit(idcat); Pas sûre d'en avoir besoin
-		iAdminProduitMetier.supprimerProduit(idProduit);
-		model.addAttribute("produitsAttribute", dao.listproduits());
+		iAdminProduitMetier.deleteProduit(idProduit);
+		model.addAttribute("produitsAttribute", iAdminProduitMetier.getListproduits());
 				
 		return "redirect:/index";
 		
@@ -86,9 +89,9 @@ public class AdminProduitsController {
 	public String editProd(@RequestParam(required=true, value="prod") Produit prod, Model model) {
 		
 		// Recup de la categorie par l'id
-		iAdminProduitMetier.modifierProduit(prod);
+		iAdminProduitMetier.editProduit(prod);
 				
-		model.addAttribute("produitsAttribute", dao.listproduits());
+		model.addAttribute("produitsAttribute", iAdminProduitMetier.getListproduits());
 				
 		return "redirect:/index";
 		
@@ -99,11 +102,11 @@ public class AdminProduitsController {
 	 * @return
 	 */
 	@RequestMapping(value="/photo", method=RequestMethod.GET)
-	public byte[] getPhoto(@RequestParam(required=true, value="cat") Categorie cat, Model model) {
+	public String getPhoto(@RequestParam(required=true, value="cat") Categorie cat, Model model) {
 		
-		byte[] photo = cat.getPhoto();
+		String photoController = cat.getPhoto();
 		
 		
-		return photo;
+		return photoController;
 	}
 }

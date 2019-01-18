@@ -3,6 +3,7 @@ package com.intiformation.gestion.commerce.controller;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -11,20 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.intiformation.gestion.commerce.metier.BoutiqueMetierImpl;
+import com.intiformation.gestion.commerce.bean.Categorie;
+import com.intiformation.gestion.commerce.dao.BoutiqueDAOImpl;
+import com.intiformation.gestion.commerce.metier.EBoutiqueMetierImpl;
 import com.intiformation.gestion.commerce.metier.IAdminCategoriesMetier;
-import com.intiformation.gestion.commerce.metier.IBoutiqueDao;
 
 @Controller
 @RequestMapping("/categorie")
 public class AdminCategoriesController {
-
-	BoutiqueMetierImpl boutique = new BoutiqueMetierImpl();
-	IBoutiqueDao dao = boutique.getDao();
 	
-	
-	// Recup de IAdminCategoriesMetier
+	@Autowired
 	private IAdminCategoriesMetier iAdminCategoriesMetier;
+	
+	
 			
 	// ctor chargé pour injection de spring				
 	public AdminCategoriesController(IAdminCategoriesMetier iAdminCategoriesMetier) {
@@ -43,9 +43,9 @@ public class AdminCategoriesController {
 
 	// Création de la liste des categories 
 	List<Categorie> listeCategories = Collections.emptyList();		
-	listeCategories = dao.listCategories();
+	listeCategories = iAdminCategoriesMetier.getListCategories();  
 	model.addAttribute("categoriesAttribute", listeCategories);
-	
+
 	// nom de la vue : index | résolution : WEB-INF/views/index.jsp
 	return "index";
 	
@@ -62,16 +62,16 @@ public class AdminCategoriesController {
 	public void suppCat(@RequestParam(required=true, value="idcat") Long idcat, Model model)  {
 		
 		//Categorie categorie = iAdminCategoriesMetier.getCategorie(idcat); Pas sûre d'en avoir besoin
-		iAdminCategoriesMetier.supprimerCategorie(idcat);
-		model.addAttribute("categoriesAttribute", dao.listCategories());
+		iAdminCategoriesMetier.deleteCategorie(idcat);    
+		model.addAttribute("categoriesAttribute", iAdminCategoriesMetier.getListCategories());
 		
-		return "redirect:/index";
+		//return "redirect:/index";
 	}	
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String saveCat(@ModelAttribute("cat") Categorie cat ) {
 		
-		iAdminCategoriesMetier.ajouterCategorie(cat);
+		iAdminCategoriesMetier.addCategorie(cat);
 		
 		return "redirect:/index";
 		
@@ -87,9 +87,9 @@ public class AdminCategoriesController {
 	public String editCat(@RequestParam(required=true, value="cat") Categorie cat, Model model) {
 		
 		// Recup de la categorie par l'id
-		iAdminCategoriesMetier.modifierCategorie(cat);
+		iAdminCategoriesMetier.editCategorie(cat);
 		
-		model.addAttribute("categoriesAttribute", dao.listCategories());
+		model.addAttribute("categoriesAttribute", iAdminCategoriesMetier.getListCategories());
 		
 		return "redirect:/index";
 		
@@ -100,12 +100,12 @@ public class AdminCategoriesController {
 	 * @return
 	 */
 	@RequestMapping(value="/photo", method=RequestMethod.GET)
-	public byte[] getPhoto(@RequestParam(required=true, value="cat") Categorie cat, Model model) {
+	public String getPhoto(@RequestParam(required=true, value="cat") Categorie cat, Model model) {
 		
-		byte[] photo = cat.getPhoto();
+		String photoController = cat.getPhoto();
 		
 		
-		return photo;
+		return photoController;
 	}
 	
 }

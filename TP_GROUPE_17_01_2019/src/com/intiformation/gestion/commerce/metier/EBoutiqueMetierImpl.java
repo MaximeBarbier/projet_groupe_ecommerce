@@ -105,4 +105,9 @@ public class EBoutiqueMetierImpl implements IAdminCategoriesMetier{
 	public void setUserRole(Role r, Long userID) {
 		boutiqueDAO.attribuerRole(r, userID);
 	}
+
+	@Override
+	public void deleteProdPanier(Long idP) {
+		boutiqueDAO.supprimerProduit(idP);
+	}// A VOIR
 }

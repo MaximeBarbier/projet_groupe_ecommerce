@@ -26,4 +26,6 @@ public interface IInternauteBoutique {
 	
 	public Commande saveCommande(Panier p, Client c);
 	
+	public void deleteProdPanier(Long idP);
+	
 }
