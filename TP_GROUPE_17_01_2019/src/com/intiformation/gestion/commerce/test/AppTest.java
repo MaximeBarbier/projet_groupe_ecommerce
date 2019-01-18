@@ -7,17 +7,18 @@ import com.intiformation.gestion.commerce.bean.Categorie;
 import com.intiformation.gestion.commerce.metier.IAdminCategoriesMetier;
 
 public class AppTest {
-
+	
 	public static void main(String[] args) {
 		
-		ApplicationContext cont = new ClassPathXmlApplicationContext("/WEB-INF/appicationContext.xml");
-		
-		IAdminCategoriesMetier catBean = (IAdminCategoriesMetier) cont.getBean("serviceBean");
-		
-		
-		Categorie cat = new Categorie("Ordi", "geek master 8000", "photo");
-		
-		catBean.addCategorie(cat);
+	
+	ApplicationContext cont = new ClassPathXmlApplicationContext("applicationContext.xml");
+	
+	IAdminCategoriesMetier catBean = (IAdminCategoriesMetier) cont.getBean("serviceBean");
+	
+	
+	Categorie cat = new Categorie("Ordi", "geek master 8000", "photo");
+	
+	catBean.addCategorie(cat);
+	
 	}
-
 }

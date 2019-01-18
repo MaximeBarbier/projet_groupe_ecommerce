@@ -95,7 +95,7 @@ public class InternauteController {
 	@RequestMapping(value="/ajoutProdEtQuantite", method=RequestMethod.POST)
 	public String ajouterProdWithQuantite(@ModelAttribute("prod") Produit prod){
 		
-		iInternauteBoutique.saveCommande(p, c)
+		iInternauteBoutique.saveCommande(p, c);
 		
 	}
 	

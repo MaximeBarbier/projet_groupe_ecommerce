@@ -20,10 +20,15 @@ public class EBoutiqueMetierImpl implements IAdminCategoriesMetier{
 	@Autowired
 	private IBoutiqueDAO boutiqueDAO;
 	
+
+	public IBoutiqueDAO getBoutiqueDAO() {
+		return boutiqueDAO;
+	}
+
 	public void setBoutiqueDAO(IBoutiqueDAO boutiqueDAO) {
 		this.boutiqueDAO = boutiqueDAO;
 	}
-	
+
 	@Override
 	public void addProduit(Produit p, Long idCat) {
 		
