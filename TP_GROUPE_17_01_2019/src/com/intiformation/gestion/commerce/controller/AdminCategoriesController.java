@@ -39,6 +39,9 @@ public class AdminCategoriesController {
 		List<Categorie> categories = adminCategorie.getListCategories();
 		model.addAttribute("categoriesAttribute", categories);
 		
+		Categorie cat = new Categorie();
+		model.addAttribute("catVide", cat);
+		
 		return "categories";
 	}
 	
