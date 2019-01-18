@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.intiformation.gestion.commerce.bean.Categorie;
 import com.intiformation.gestion.commerce.dao.BoutiqueDAOImpl;
@@ -75,27 +76,57 @@ public class AdminCategoriesController {
 		
 		iAdminCategoriesMetier.addCategorie(cat);
 		
-		return "redirect:/index";
+		return "redirect:/listCategories";
 		
 	}
 	
+	
+	
+	
+	
 	/**
-	 * Méthode pour modifier 
-	 * @param idcat
+	 * afficher le formulaire en réponse à une requête GET pour la modification
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/updatecategorieform", method = RequestMethod.GET)
+	public ModelAndView setUpFormulaireUpdate(@RequestParam("catid") long pIdcategorie) {
+		
+		//1. recup du fonctionnaire de la bdd (c'est l'objet de commande)
+		Categorie categorie = iAdminCategoriesMetier.getCategorie(pIdcategorie);
+		
+		return new ModelAndView("editCategorie","categorieUpCommand", categorie);
+	}
+	
+	
+	
+	
+	/**
+	 * modifier une cat
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/edit", method=RequestMethod.POST)
-	public String editCat(@RequestParam(required=true, value="cat") Categorie cat, Model model) {
+	@RequestMapping(value = "/updatecategorie", method = RequestMethod.POST)
+	public String updateCategorie( @ModelAttribute("categorieUpCommand") Categorie pcategorie,
+			                           Model model) {
 		
-		// Recup de la categorie par l'id
-		iAdminCategoriesMetier.editCategorie(cat);
+		//modif
+		iAdminCategoriesMetier.editCategorie(pcategorie);
 		
+
+		// recup les fonctionnaires de la bdd + renvoi des données vers
+		// fonctionnaires.jsp
 		model.addAttribute("categoriesAttribute", iAdminCategoriesMetier.getListCategories());
 		
-		return "redirect:/index";
-		
+
+		// redirection vers fonctionnaires.jsp
+		return "redirect:/listCategories";
 	}
+	
+	
+
+	
+	
 	
 	/**
 	 * Méthode pour afficher la photo
@@ -124,7 +155,7 @@ public class AdminCategoriesController {
 		iAdminCategoriesMetier.addCategorie(pcategorie);
 
 
-		return "categories";
+		return "redirect:/listCategories";
 		
 	}
 	
