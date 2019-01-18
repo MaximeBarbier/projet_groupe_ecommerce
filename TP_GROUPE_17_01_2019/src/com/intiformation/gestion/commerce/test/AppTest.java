@@ -10,7 +10,7 @@ public class AppTest {
 
 	public static void main(String[] args) {
 		
-		ApplicationContext cont = new ClassPathXmlApplicationContext("appicationContext.xml");
+		ApplicationContext cont = new ClassPathXmlApplicationContext("/WEB-INF/appicationContext.xml");
 		
 		IAdminCategoriesMetier catBean = (IAdminCategoriesMetier) cont.getBean("serviceBean");
 		
