@@ -24,8 +24,8 @@
 			<nav>
                <ul>
                    <li>Menu</li>
-                   <li><a href="listeProduits">Produits</a></li>
-                   <li><a href="listCategories">Categories</a></li>
+                   <li><a href="/listeProduits">Produits</a></li>
+                   <li><a href="/listCategories">Categories</a></li>
                </ul>
             </nav>
 		</div>
