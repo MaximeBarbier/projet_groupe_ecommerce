@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,39 +14,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.intiformation.gestion.commerce.bean.Categorie;
-import com.intiformation.gestion.commerce.dao.BoutiqueDAOImpl;
-import com.intiformation.gestion.commerce.metier.EBoutiqueMetierImpl;
 import com.intiformation.gestion.commerce.metier.IAdminCategoriesMetier;
 
 
 @Controller
 @RequestMapping("/categorie")
 public class AdminCategoriesController {
-	
+
 	@Autowired
-	private IAdminCategoriesMetier iAdminCategoriesMetier;
-	
-	
-			
-	// ctor chargé pour injection de spring				
-	public AdminCategoriesController(IAdminCategoriesMetier iAdminCategoriesMetier) {
+	private IAdminCategoriesMetier adminCategorie;
+
+	// ctor chargé pour injection de spring
+	public AdminCategoriesController(IAdminCategoriesMetier adminCategorie) {
 		super();
-		this.iAdminCategoriesMetier = iAdminCategoriesMetier;
+		this.adminCategorie = adminCategorie;
 	}
 
-
-
-    /**
-     * Méthode index pour afficher la liste des produits et des catégories
-     * @return
-     */
-	@RequestMapping(value="/listCategories", method=RequestMethod.GET)
+	/**
+	 * Méthode index pour afficher la liste des produits et des catégories
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/listCategories", method = RequestMethod.GET)
 	public String index(Model model) {
 
-	// Création de la liste des categories 
-	List<Categorie> listeCategories = Collections.emptyList();		
-	listeCategories = iAdminCategoriesMetier.getListCategories();  
-	model.addAttribute("categoriesAttribute", listeCategories);
+		// Création de la liste des categories
+		List<Categorie> listeCategories = Collections.emptyList();
+		listeCategories = adminCategorie.getListCategories();
+		model.addAttribute("categoriesAttribute", listeCategories);
+
 
 	// nom de la vue : index | résolution : WEB-INF/views/categories.jsp
 	return "categories";
@@ -160,4 +155,8 @@ public class AdminCategoriesController {
 //	}
 	
 	
+
+		
+
+
 }
