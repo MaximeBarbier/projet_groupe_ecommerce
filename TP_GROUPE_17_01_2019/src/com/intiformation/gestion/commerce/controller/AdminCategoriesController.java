@@ -45,23 +45,25 @@ public class AdminCategoriesController {
 		return "categories";
 	}
 	
-//	/**
-//	 * Méthode delete catégorie
-//	 * @param idcat
-//	 * @param model
-//	 */
-//	@RequestMapping(value="/deleteCategorie", method=RequestMethod.GET)
-//	//@RequestMapping(value="/deleteCategorie/{idcat}", method=RequestMethod.GET)
-//	// en argument de suppcat => (@PathVariable long idcat)
-//	public void suppCat(@RequestParam(required=true, value="idcat") Long idcat, Model model)  {
-//		
-//		//Categorie categorie = iAdminCategoriesMetier.getCategorie(idcat); Pas sûre d'en avoir besoin
-//		iAdminCategoriesMetier.deleteCategorie(idcat);    
-//		model.addAttribute("categoriesAttribute", iAdminCategoriesMetier.getListCategories());
-//		
-//		//return "redirect:/index";
-//	}	
-//	
+	/**
+	 * Méthode delete catégorie
+	 * @param idcat
+	 * @param model
+	 */
+	@RequestMapping(value="/deleteCategorie*", method=RequestMethod.GET)
+	public String suppCat(@RequestParam(required=true, value="idcat") Long idcat, Model model)  {
+		
+		adminCategorie.deleteCategorie(idcat);
+    
+		List<Categorie> categories = adminCategorie.getListCategories();
+		model.addAttribute("categoriesAttribute", categories);
+		
+		Categorie cat = new Categorie();
+		model.addAttribute("catVide", cat);
+		
+		return "redirect:/listCat";
+	}	
+
 //	@RequestMapping(value="/save", method=RequestMethod.POST)
 //	public String saveCat(@ModelAttribute("cat") Categorie cat ) {
 //		

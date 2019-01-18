@@ -66,7 +66,7 @@
 						<td>${cat.description}</td>
 						<td>${cat.photo}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/deleteCategorie${cat.idCategorie}">Supprimer</a>
+							<a href="${pageContext.request.contextPath}/deleteCategorie?idcat=${cat.idCategorie}">Supprimer</a>
 						</td>
 						<td>
 							<a href="${pageContext.request.contextPath}/updatecategorieform?catid=${cat.idCategorie}">Editer</a>

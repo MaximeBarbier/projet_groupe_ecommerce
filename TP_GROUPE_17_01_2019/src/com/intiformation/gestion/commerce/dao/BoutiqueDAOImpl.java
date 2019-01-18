@@ -45,7 +45,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public List<Categorie> listCategories() {
 		
 		Query query = em.createQuery("SELECT c FROM categorie c");
