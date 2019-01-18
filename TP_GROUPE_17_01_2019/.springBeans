@@ -9,6 +9,7 @@
 	<configs>
 		<config>WebContent/WEB-INF/appicationContext.xml</config>
 		<config>WebContent/WEB-INF/applicationContext-metier.xml</config>
+		<config>WebContent/WEB-INF/applicationContext-servlet.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>WebContent/WEB-INF/applicationContext-datasource.xml</config>
