@@ -8,5 +8,8 @@
 </head>
 <body>
 	<h1>HAHAHAHAH</h1>
+	
+	<a href="categorie">lien vers la page categorie</a>
+	
 </body>
 </html>
