@@ -25,11 +25,6 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	@PersistenceContext
 	private EntityManager em;
 	
-	//Setter de l'em pour l'injecter dans le DAO
-	public void setEm(EntityManager em) {
-		
-		this.em = em;
-	}
 
 	@Override
 	@Transactional

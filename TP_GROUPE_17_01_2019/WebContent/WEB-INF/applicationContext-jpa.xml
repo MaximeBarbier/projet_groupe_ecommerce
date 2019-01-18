@@ -21,7 +21,7 @@
 	<!--============================================================== -->
 	<!--====== ACTIVER LA DETECTION AUTO DES BEANS (COMPOSANTS) ======= -->
 	<!--=============================================================== -->
-	<context:component-scan base-package="com.intiformation" />
+	<context:component-scan base-package="com.intiformation.gestion.commerce" />
 
 	<!--==================================================================================== -->
 	<!--==      declaration du bean de la fabrique de gestionnaires d’entités (EMF)      === -->
@@ -65,10 +65,7 @@
 	<!--============ declaration d'un gestionnaire de transactions =============== -->
 	<!--=========================================================================== -->
 	<bean id="transactionManagerBean" class="org.springframework.orm.jpa.JpaTransactionManager">
-	
 		<property name="entityManagerFactory" ref="entityManagerFactoryBean" />
-		
 	</bean>
-
 
 </beans>
