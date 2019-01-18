@@ -35,7 +35,7 @@ public class AdminProduitsController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/index", method=RequestMethod.GET)
+	@RequestMapping(value="/listeProduits", method=RequestMethod.GET)
 	public String index(Model model) {
 		
 		// Création de la liste des produits 
@@ -44,7 +44,7 @@ public class AdminProduitsController {
 		model.addAttribute("produitsAttribute", listeProduits);
 		
 		// nom de la vue : index | résolution : WEB-INF/views/index.jsp
-		return "index";
+		return "produits";
 	}
 	
 	/**

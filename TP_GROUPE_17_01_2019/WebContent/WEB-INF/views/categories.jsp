@@ -24,8 +24,8 @@
 			<nav>
                <ul>
                    <li>Menu</li>
-                   <li><a href="produits">Produits</a></li>
-                   <li><a href="categorie">Categories</a></li>
+                   <li><a href="listeProduits">Produits</a></li>
+                   <li><a href="listCategories">Categories</a></li>
                </ul>
             </nav>
 		</div>
@@ -77,7 +77,7 @@
 							<a href="${pageContext.request.contextPath}/deleteCategorie${cat.idProduit}">Supprimer</a>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/edit${cat.idProduit}">Editer</a>
+							<a href="${pageContext.request.contextPath}/updatecategorieform?catid=${cat.idProduit}">Editer</a>
 						</td>	
 					</tr>
 				</c:forEach>	
