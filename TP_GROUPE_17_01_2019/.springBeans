@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>WebContent/WEB-INF/appicationContext.xml</config>
+		<config>WebContent/WEB-INF/applicationContext-metier.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>WebContent/WEB-INF/applicationContext-datasource.xml</config>
