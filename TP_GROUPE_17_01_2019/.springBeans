@@ -7,17 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-<<<<<<< HEAD
-		<config>WebContent/WEB-INF/applicationContext.xml</config>
-=======
-		<config>WebContent/WEB-INF/appicationContext.xml</config>
-		<config>WebContent/WEB-INF/applicationContext-metier.xml</config>
-		<config>WebContent/WEB-INF/applicationContext-servlet.xml</config>
->>>>>>> branch 'master' of https://github.com/MaximeBarbier/projet_groupe_ecommerce
+		<config>WebContent/WEB-INF/eCommerce-servlet.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>WebContent/WEB-INF/applicationContext-datasource.xml</config>
-		<config>WebContent/WEB-INF/applicationContext-jpa.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
