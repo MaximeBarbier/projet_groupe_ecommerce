@@ -40,7 +40,7 @@ public class AdminCategoriesController {
      * Méthode index pour afficher la liste des produits et des catégories
      * @return
      */
-	@RequestMapping(value="/categories", method=RequestMethod.GET)
+	@RequestMapping(value="/listCategories", method=RequestMethod.GET)
 	public String index(Model model) {
 
 	// Création de la liste des categories 
@@ -48,7 +48,7 @@ public class AdminCategoriesController {
 	listeCategories = iAdminCategoriesMetier.getListCategories();  
 	model.addAttribute("categoriesAttribute", listeCategories);
 
-	// nom de la vue : index | résolution : WEB-INF/views/categorie.jsp
+	// nom de la vue : index | résolution : WEB-INF/views/categories.jsp
 	return "categories";
 	
 		}
@@ -113,7 +113,7 @@ public class AdminCategoriesController {
 	
 	
 	/**
-	 * ajout d'un cat a la bdd
+	 * ajout d'une cat a la bdd
 	 * @return
 	 */
 	@RequestMapping(value = "/addCat", method = RequestMethod.POST)
