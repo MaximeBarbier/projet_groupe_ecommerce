@@ -56,6 +56,13 @@ public class Categorie {
 		this.photo = photo;
 		this.produits = produits;
 	}
+	
+	public Categorie(String nomCategorie, String description, String photo) {
+		super();
+		this.nomCategorie = nomCategorie;
+		this.description = description;
+		this.photo = photo;
+	}
 
 	/*__________________________________________Les encapsulations______________________________________*/
 	

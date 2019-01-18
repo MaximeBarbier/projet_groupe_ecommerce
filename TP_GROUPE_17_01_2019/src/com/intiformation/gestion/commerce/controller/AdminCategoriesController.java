@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import com.intiformation.gestion.commerce.bean.Categorie;
 import com.intiformation.gestion.commerce.dao.BoutiqueDAOImpl;
 import com.intiformation.gestion.commerce.metier.EBoutiqueMetierImpl;
 import com.intiformation.gestion.commerce.metier.IAdminCategoriesMetier;
+import com.intiformation.springmvc.entity.Fonctionnaire;
 
 @Controller
 @RequestMapping("/categorie")
@@ -107,5 +109,24 @@ public class AdminCategoriesController {
 		
 		return photoController;
 	}
+	
+	
+	
+	/**
+	 * ajout d'un cat a la bdd
+	 * @return
+	 */
+	@RequestMapping(value = "/addCat", method = RequestMethod.POST)
+	public String addCategorie (@ModelAttribute("categorieCommand") 
+    							@Validated Categorie pcategorie) {
+		
+		//ajout d'une categorie
+		iAdminCategoriesMetier.addCategorie(pcategorie);
+
+
+		return "categories";
+		
+	}
+	
 	
 }
