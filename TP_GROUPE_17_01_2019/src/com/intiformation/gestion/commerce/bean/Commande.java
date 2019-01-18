@@ -23,7 +23,7 @@ public class Commande {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_commande")
-	private long idCommande; 
+	private Long idCommande; 
 	@Column(name="date_commande")
 	private Date dateCommande;
 	
@@ -53,11 +53,11 @@ public class Commande {
 	}
 	/*__________________________________________Les encapsulations______________________________________*/
 	
-	public long getIdCommande() {
+	public Long getIdCommande() {
 		return idCommande;
 	}
 
-	public void setIdCommande(long idCommande) {
+	public void setIdCommande(Long idCommande) {
 		this.idCommande = idCommande;
 	}
 	/*__________________________________________Les encapsulations______________________________________*/

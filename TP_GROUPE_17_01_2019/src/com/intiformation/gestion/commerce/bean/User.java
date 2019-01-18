@@ -16,7 +16,7 @@ import javax.persistence.Table;
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		@Column(name="id_user")
-		private long idUser;
+		private Long idUser;
 		@Column(name="username")
 		private String username;
 		@Column(name="password")
@@ -40,7 +40,7 @@ import javax.persistence.Table;
 		}
 
 
-		public User(long idUser, String username, String password, boolean activated) {
+		public User(Long idUser, String username, String password, boolean activated) {
 			super();
 			this.idUser = idUser;
 			this.username = username;
@@ -49,10 +49,10 @@ import javax.persistence.Table;
 		}
 
 		/*___________________________________encapsulation_________________________________________________________________________________*/
-		public long getIdUser() {
+		public Long getIdUser() {
 			return idUser;
 		}
-		public void setIdUser(long idUser) {
+		public void setIdUser(Long idUser) {
 			this.idUser = idUser;
 		}
 		public String getUsername() {

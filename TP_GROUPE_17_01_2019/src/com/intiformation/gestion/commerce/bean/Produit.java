@@ -19,7 +19,7 @@ public class Produit {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_produit")
-	private long idProduit; 
+	private Long idProduit; 
 	@Column(name="designation")
 	private String designation;
 	@Column(name="description")
@@ -41,7 +41,7 @@ public class Produit {
 		
 	}
 
-	public Produit(long idProduit, String designation, String description, double prix, String photo, int quantite,
+	public Produit(Long idProduit, String designation, String description, double prix, String photo, int quantite,
 			boolean selectionne, Categorie categorie) {
 		
 		this.idProduit = idProduit;
@@ -67,11 +67,11 @@ public class Produit {
 	}
 	/*__________________________________________Les encapsulations______________________________________*/
 	
-	public long getIdProduit() {
+	public Long getIdProduit() {
 		return idProduit;
 	}
 
-	public void setIdProduit(long idProduit) {
+	public void setIdProduit(Long idProduit) {
 		this.idProduit = idProduit;
 	}
 

@@ -22,7 +22,7 @@ public class Categorie {
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	@Column(name="id_categorie")
-	private long idCategorie;
+	private Long idCategorie;
 	@Column(name="nom_categorie")
 	private String nomCategorie;
 	@Column(name="description")
@@ -67,11 +67,11 @@ public class Categorie {
 	/*__________________________________________Les encapsulations______________________________________*/
 	
 	
-	public long getIdCategorie() {
+	public Long getIdCategorie() {
 		return idCategorie;
 	}
 
-	public void setIdCategorie(long idCategorie) {
+	public void setIdCategorie(Long idCategorie) {
 		this.idCategorie = idCategorie;
 	}
 

@@ -21,7 +21,7 @@ public class Client {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Column(name="id_client")
-	private long idClient; 
+	private Long idClient; 
 	@Column(name="nom_client")
 	private String nomClient; 
 	@Column(name="adresse")
@@ -55,10 +55,10 @@ public class Client {
 		this.tel = tel;
 	}
 	/*__________________________________________Les encapsulations______________________________________*/
-	public long getIdClient() {
+	public Long getIdClient() {
 		return idClient;
 	}
-	public void setIdClient(long idClient) {
+	public void setIdClient(Long idClient) {
 		this.idClient = idClient;
 	}
 	public String getNomClient() {

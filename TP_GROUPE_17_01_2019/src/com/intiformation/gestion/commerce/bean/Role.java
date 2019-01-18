@@ -20,7 +20,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_role")
-	private long idRole;
+	private Long idRole;
 	@Column(name="role_name")
 	private String roleName;
 	@ManyToOne
@@ -37,7 +37,7 @@ public class Role {
 		super();
 	}
 	
-	public Role(long idRole, String roleName) {
+	public Role(Long idRole, String roleName) {
 		super();
 		this.idRole = idRole;
 		this.roleName = roleName;
@@ -46,10 +46,10 @@ public class Role {
 	/*___________________________________Encapsulation_________________________________________________________________________________*/
 	
 	
-	public long getIdRole() {
+	public Long getIdRole() {
 		return idRole;
 	}
-	public void setIdRole(long idRole) {
+	public void setIdRole(Long idRole) {
 		this.idRole = idRole;
 	}
 	public String getRoleName() {

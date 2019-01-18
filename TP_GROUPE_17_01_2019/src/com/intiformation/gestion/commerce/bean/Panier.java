@@ -20,7 +20,7 @@ public class Panier {
 		}
 	}
 
-	public void supprimerProduit(long idProduit) {
+	public void supprimerProduit(Long idProduit) {
 		article.remove(idProduit);
 	}
 	

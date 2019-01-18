@@ -17,7 +17,7 @@ public class LigneCommande {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private long id;
+	private Long id;
 	@Column(name="quantite")
 	private int quantite; 
 	@Column(name="prix")
