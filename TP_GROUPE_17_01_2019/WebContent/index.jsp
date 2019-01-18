@@ -9,7 +9,7 @@
 <body>
 	<h1>HAHAHAHAH</h1>
 	
-	<% response.sendRedirect("/listCategories"); %>
+	<a href="${pageContext.request.contextPath}/listCat">TEST</a>
 	
 </body>
 </html>

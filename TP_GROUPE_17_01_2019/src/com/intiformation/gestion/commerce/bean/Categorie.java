@@ -107,6 +107,14 @@ public class Categorie {
 		this.produits = produits;
 	}
 
+	@Override
+	public String toString() {
+		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", description="
+				+ description + ", photo=" + photo + ", produits=" + produits + "]";
+	}
+	
+	
+
 	
 	
 	

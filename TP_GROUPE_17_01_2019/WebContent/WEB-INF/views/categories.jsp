@@ -13,21 +13,13 @@
 </head>
 <body>
 
-	<header>
-		<h1>HEADER</h1>
-	</header>
-
-
-	<section style="border: 1px black;" >
 	
 		<div style="border: 1px black; width: 20%; text-align: center; float: left;">
-			<nav>
                <ul>
                    <li>Menu</li>
                    <li><a href="/listeProduits">Produits</a></li>
                    <li><a href="/listCategories">Categories</a></li>
                </ul>
-            </nav>
 		</div>
 	
 		<div style="border: 1px black; width: 75%; text-align: center; float: left;">
@@ -74,22 +66,15 @@
 						<td>${cat.description}</td>
 						<td>${cat.photo}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/deleteCategorie${cat.idProduit}">Supprimer</a>
+							<a href="${pageContext.request.contextPath}/deleteCategorie${cat.idCategorie}">Supprimer</a>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/updatecategorieform?catid=${cat.idProduit}">Editer</a>
+							<a href="${pageContext.request.contextPath}/updatecategorieform?catid=${cat.idCategorie}">Editer</a>
 						</td>	
 					</tr>
 				</c:forEach>	
 			</table>
 		</div>
-		
-		
-	</section>
-
-	<footer>
-		<h1>FOOTER</h1>
-	</footer>
 
 
 

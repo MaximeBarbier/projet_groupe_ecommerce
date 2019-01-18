@@ -1,6 +1,5 @@
 package com.intiformation.gestion.commerce.controller;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +17,14 @@ import com.intiformation.gestion.commerce.metier.IAdminCategoriesMetier;
 
 
 @Controller
-@RequestMapping("/categorie")
 public class AdminCategoriesController {
 
-	@Autowired
+	
 	private IAdminCategoriesMetier adminCategorie;
 
 	// ctor chargé pour injection de spring
+	@Autowired
 	public AdminCategoriesController(IAdminCategoriesMetier adminCategorie) {
-		super();
 		this.adminCategorie = adminCategorie;
 	}
 
@@ -35,19 +33,14 @@ public class AdminCategoriesController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/listCategories", method = RequestMethod.GET)
-	public String index(Model model) {
-
-		// Création de la liste des categories
-		List<Categorie> listeCategories = Collections.emptyList();
-		listeCategories = adminCategorie.getListCategories();
-		model.addAttribute("categoriesAttribute", listeCategories);
-
-
-	// nom de la vue : index | résolution : WEB-INF/views/categories.jsp
-	return "categories";
-	
-		}
+	@RequestMapping(method=RequestMethod.GET,  path="/listCat")
+	public String generateList(Model model) {
+		
+		List<Categorie> categories = adminCategorie.getListCategories();
+		model.addAttribute("categoriesAttribute", categories);
+		
+		return "categories";
+	}
 	
 //	/**
 //	 * Méthode delete catégorie
