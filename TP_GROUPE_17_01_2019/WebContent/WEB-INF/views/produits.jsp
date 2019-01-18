@@ -78,7 +78,7 @@
 					</tr>
 					<tr>
 						<td>Photo :</td>
-						<td><form:input type="file"/> Choisir photo</td>
+						<td><form:input type="file" path="photo"/> Choisir photo</td>
 					</tr>					
 					<tr>
 						<td colspan="2" > <input type="submit" value="post">Enregistrer</td>

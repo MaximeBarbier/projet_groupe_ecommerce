@@ -31,7 +31,7 @@
 		</div>
 	
 		<div style="border: 1px black; width: 75%; text-align: center; float: left;">
-			<form:form method="post" modelAttribute="...." action="${pageContext.request.contextPath}/...">
+			<form:form method="post"  action="${pageContext.request.contextPath}/addCat">
 				<table>
 					<tr>
 						<td> ID Categorie :</td>

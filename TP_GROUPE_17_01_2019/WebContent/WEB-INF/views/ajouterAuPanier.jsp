@@ -76,13 +76,13 @@
 					<th></th>	
 				</tr>
 				
-				<c:forEach items="${........}" var="prod">
+				<c:forEach items="${produit du panier....}" var="prod">
 					<tr>
-						<td>${prod. }</td>
-						<td>${ }</td>
-						<td>${ }</td>
-						<td>${ }</td>
-						<td>${ }</td>
+						<td>${prod.idProduit}</td>
+						<td>${prod.designation}</td>
+						<td>${prod.prix}</td>
+						<td>${prod.quantite}</td>
+						<td>méthode pour calculer montant</td>
 						<td>Total</td>	
 					</tr>
 				</c:forEach>
@@ -93,7 +93,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>${ }</td>
+					<td>méthode pour calculer total</td>
 				</tr>		
 			</table>
 		</div>
@@ -101,17 +101,17 @@
 		
 		<!-- Affichage des produits -->
 		
-		<c:forEach items="${........}" var="prod">
+		<c:forEach items="${produitsAttribute}" var="prod">
 			<div style="border: 1px black; width: 30%; float: left;">
 				<img src="image du produit">
 				<table>
 					<tr>
 						<td>Désigation :</td>
-						<td><form:outputText path=""/></td>
+						<td><form:outputText path="designation"/></td>
 					</tr>
 					<tr>
 						<td>Prix :</td>
-						<td><form:outputText path=""/></td>
+						<td><form:outputText path="prix"/></td>
 					</tr>
 					<tr>
 						<td><input type="text" name="quantité"></td>
