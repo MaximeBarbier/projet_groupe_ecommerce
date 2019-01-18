@@ -21,7 +21,7 @@ import com.intiformation.gestion.commerce.bean.User;
 public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	
 	//Entity manager pour utiliser les méthodes jpa
-	//Annotation pour que le serveur gère l'instanciation de l'em sans qu'on utilise l'entity manager 	factory
+	//Annotation pour que le serveur gère l'instanciation de l'em sans qu'on utilise l'entity manager factory
 	@PersistenceContext
 	private EntityManager em;
 	
