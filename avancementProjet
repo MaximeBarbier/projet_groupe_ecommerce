@@ -4,6 +4,10 @@ j'ai fait un peu de mise en page (c'est du basique, j'ai pas réussi à afficher
 Avec Tina on a avancé sur l'Internaute Controller, sur la page principale on peut afficher la liste des catégories et la liste de tous les 
 produits de la bdd, afficher les produits en fonction de la catégorie et afficher les produits après la recherche par mot-clé.
 
+
+En fonction de notre avancement, si on n'a pas le temps de faire la sécurité on pourrait peut-être faire des liens vers la gestion des
+catégories et celle des produits pour montrer que nos fonctions fonctionnent.
+
 Bonne soirée
 
 Aurore
