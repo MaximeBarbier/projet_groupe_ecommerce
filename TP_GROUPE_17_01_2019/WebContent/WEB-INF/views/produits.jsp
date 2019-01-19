@@ -27,8 +27,8 @@
 			<nav>
                <ul>
                    <li>Menu</li>
-                   <li><a href="produits....">Produits</a></li>
-                   <li><a href="categories...">Categories</a></li>
+                   <li><a href="${pageContext.request.contextPath}/listCat">Produits</a></li>
+                   <li><a href="${pageContext.request.contextPath}/listProd">Categories</a></li>
                </ul>
             </nav>
 		</div>
@@ -41,7 +41,7 @@
 			</s:authorize>
 		
 			<!-- Formulaire d'ajout de produit -->
-			<form:form method="post" modelAttribute="prod" action="${pageContext.request.contextPath}/save">
+			<form:form method="post" modelAttribute="prodVide">
 				<table>
 					<tr>
 						<td> ID Produit :</td>
@@ -52,7 +52,7 @@
 						<td> 
 							<form:select path="categorie">
 								<form:option value="NONE" label="-------- Select --------"/>
-								<form:options items="${ListeCategorie}"/>
+								<form:options items="${ListeCaterogies}"/>
 							</form:select> 
 						</td>
 					</tr>					
@@ -112,10 +112,10 @@
 						<td>${prod.quantite}</td>
 						<td>${prod.photo}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/......./delete${fonct.id}">Supprimer</a>
+							<a href="${pageContext.request.contextPath}/deleteProd?idProd=${prod.idProduit}">Supprimer</a>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/....../edit/${fonct.id}">Editer</a>
+							<a href="${pageContext.request.contextPath}/editProd?idProd=${prod.idProduit}">Editer</a>
 						</td>	
 					</tr>
 				</c:forEach>	

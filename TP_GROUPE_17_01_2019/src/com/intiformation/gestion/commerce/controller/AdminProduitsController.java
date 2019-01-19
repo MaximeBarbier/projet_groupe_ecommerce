@@ -1,11 +1,13 @@
 package com.intiformation.gestion.commerce.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,35 +19,38 @@ import com.intiformation.gestion.commerce.bean.Categorie;
 import com.intiformation.gestion.commerce.bean.Produit;
 
 @Controller
-@RequestMapping("/produits")
 public class AdminProduitsController {
 
 	// Recup IAdminProduitMetier
-	@Autowired
 	private IAdminProduitMetier iAdminProduitMetier;
 
 	// ctor chargé pour injection spring
+	@Autowired
 	public AdminProduitsController(IAdminProduitMetier iAdminProduitMetier) {
 		super();
 		this.iAdminProduitMetier = iAdminProduitMetier;
 	}
 	
+	
+	
 	/**
-	 * Méthode pour afficher la liste des produits
-	 * @param model
+	 * Méthode index pour afficher la liste des produits 
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value="/listeProduits", method=RequestMethod.GET)
-	public String index(Model model) {
+	@RequestMapping(method=RequestMethod.GET,  path="/listProd")
+	public String generateList(Model model) {
 		
-		// Création de la liste des produits 
-		List<Produit> listeProduits = Collections.emptyList();		
-		listeProduits = iAdminProduitMetier.getListproduits();
-		model.addAttribute("produitsAttribute", listeProduits);
+		List<Produit> produits = iAdminProduitMetier.getListproduits();
+		model.addAttribute("produitsAttribute", produits);
 		
-		// nom de la vue : index | résolution : WEB-INF/views/index.jsp
+		Produit prod = new Produit();
+		model.addAttribute("prodVide", prod);
+		
 		return "produits";
 	}
+	
+	
 	
 	/**
 	 * Méthode pour ajouter un produit dans une catégorie
@@ -54,59 +59,87 @@ public class AdminProduitsController {
 	 * @return
 	 */
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String saveProd(@ModelAttribute("prod") Produit prod,
-							@ModelAttribute("idcat") Long idCat) {
+	public String saveProd(@ModelAttribute("prodVide") Produit prod,
+							// la methode addProduit a besoin de l'idCategorie, mais je ne sais pas comment le recup seul.
+							// l'idCategorie se trouve deja dans le formulaire d'ajout d'un produit
+						   @RequestParam(required=true, value="idCat")long catID) {
+	
+		iAdminProduitMetier.addProduit(prod, catID);
 		
-		iAdminProduitMetier.addProduit(prod, idCat);
-		
-		return "redirect:/index";
+		return "redirect:/listProd";
 		
 	}
+	
+	
 	/**
-	 * Méthode pour supprimer un produit par son id
-	 * @param idProduit
+	 * supprimmer un produit
+	 * @param prodID
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value="/deleteProd", method=RequestMethod.GET)
-	public String suppProd(@RequestParam(required=true, value="idProduit") Long idProduit, Model model) {
+	public String produitDelete(@RequestParam(required=true, value="idProd")long prodID) {
 		
-		//Categorie categorie = iAdminProduitsMetier.getProduit(idcat); Pas sûre d'en avoir besoin
-		iAdminProduitMetier.deleteProduit(idProduit);
-		model.addAttribute("produitsAttribute", iAdminProduitMetier.getListproduits());
-				
-		return "redirect:/index";
+		//Produit produit = iAdminProduitMetier.getProduct(prodID);
+		iAdminProduitMetier.deleteProduit(prodID);
+		//model.addAttribute("produitAttribute", iAdminProduitMetier.getListproduits());
 		
+		return "redirect:/listProd";
 	}
 	
+	
+	
 	/**
-	 * Méthode pour modifier un produit
-	 * @param prod
+	 *  Méthode pour modifier un produit (charger formulaire avec le produit)
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/edit", method=RequestMethod.POST)
-	public String editProd(@RequestParam(required=true, value="prod") Produit prod, Model model) {
+	@RequestMapping(value="/editProd", method=RequestMethod.GET)
+	//produitAttribute se trouve dans le formulaire de la page editProduit.jsp
+	public String chargementProduitFormulaire(@RequestParam(required=true, value="idProd")long prodID, Model model) {
 		
-		// Recup de la categorie par l'id
-		iAdminProduitMetier.editProduit(prod);
-				
-		model.addAttribute("produitsAttribute", iAdminProduitMetier.getListproduits());
-				
-		return "redirect:/index";
+		Produit produit = iAdminProduitMetier.getProduct(prodID);
 		
+		model.addAttribute("produitAttribute", produit);
+		
+		// vue : /WEb-INF/views/editProduit.jsp
+		return "editProduit";			
 	}
 	
+	
+	
 	/**
-	 * Méthode pour afficher la photo
+	 * edit le produit de editProduit.jsp
+	 * @param message
 	 * @return
 	 */
-	@RequestMapping(value="/photo", method=RequestMethod.GET)
-	public String getPhoto(@RequestParam(required=true, value="cat") Categorie cat, Model model) {
+	@RequestMapping(method=RequestMethod.POST)
+	//produitAttribute se trouve dans le formulaire de la page editProduit.jsp
+	public String modifProduit(@ModelAttribute("produitAttribute") Produit produit) {
 		
-		String photoController = cat.getPhoto();
+			iAdminProduitMetier.editProduit(produit);
+			
+			return "redirect:/listProd";
+		}
 		
+	
+	
+	/**
+	 * chargement de la liste déroulante des categories 
+	 * @return
+	 */
+	@ModelAttribute("ListeCaterogies")
+	public List<Categorie> categoriesList(){
 		
-		return photoController;
+		List<Categorie> listeCategories = new ArrayList<>();
+		
+		listeCategories = iAdminProduitMetier.getListCategories();
+		
+		return listeCategories;
 	}
+	
+	
+	
+	
+
 }
