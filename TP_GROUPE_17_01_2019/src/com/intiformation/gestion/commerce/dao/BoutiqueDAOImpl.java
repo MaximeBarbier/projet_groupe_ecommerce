@@ -143,7 +143,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	@Transactional
 	public void supprimerProduit(Long idP) {
 		
-		Produit prod = this.getProduit(idP);
+		Produit prod = em.find(Produit.class, idP);
 		em.remove(prod);	
 	}
 
