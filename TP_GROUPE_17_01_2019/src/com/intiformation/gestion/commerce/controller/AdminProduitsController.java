@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.intiformation.gestion.commerce.metier.EBoutiqueMetierImpl;
 import com.intiformation.gestion.commerce.metier.IAdminProduitMetier;
-import com.intiformation.springmvc.entity.Fonctionnaire;
+import com.intiformation.gestion.commerce.validator.ProduitValidateur;
 import com.intiformation.gestion.commerce.bean.Categorie;
 import com.intiformation.gestion.commerce.bean.Produit;
 
@@ -93,29 +93,29 @@ public class AdminProduitsController {
 	 */
 	@RequestMapping(path="/save", method=RequestMethod.POST)
 	public String saveProd(
-			                @ModelAttribute("produitCommand") Produit prod,
+			                @ModelAttribute("produitCommand") Produit prod, Long idProd,
 			                @Validated Produit pProduit,
 			                ModelMap modele, BindingResult result) {
 	
 		//validation du champs à l'ajout
-				//result de type BindingResult : contiens les resultats du process de  la validations 
+				//result de type BindingResult : contient les resultats du process de  la validation 
 				
+				ProduitValidateur validator = new ProduitValidateur();
 				validator.validate(pProduit, result);
 				
 				if (result.hasErrors()) {
 					
 					/*détection d'erreurs lors de la validation*/
 					
-					//--> redirection vers ajouterProduit.jsp
-					return "ajouterProduit";
+					//--> redirection vers liste des produits
+					return "redirect:/listProd";
 					
 				}else {
 					
 					/*pas d'erreurs de validation*/ 
 					
 					// ajout du produit
-					i.ajouterFonctionnaire(pFonctionnaire);
-
+					iAdminProduitMetier.addProduit(prod,idProd);
 					// recup des produits  de la bdd + renvoi des données vers
 					// produits.jsp
 					modele.addAttribute("produitsAttribute", iAdminProduitMetier.getListproduits());
@@ -125,7 +125,7 @@ public class AdminProduitsController {
 				}
 			}
 		
-	}
+	
 	
 	
 	/**
