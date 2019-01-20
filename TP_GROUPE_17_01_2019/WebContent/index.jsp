@@ -25,6 +25,9 @@
 	<div style="text-align:center; background-color: black; margin-top: 220px; height:200px; width: 400px; margin-left: 580px; padding-top: 80px;">
 		<a href="${pageContext.request.contextPath}/listListe" style="text-decoration:none; color: white; font-size:x-large ; font-family: 'Times New Roman';">ACCES AU SITE</a>
 	</div>
+	<div style="text-align:center; background-color: black; margin-top: 220px; height:200px; width: 400px; margin-left: 580px; padding-top: 80px;">
+		<a href="${pageContext.request.contextPath}/listCat" style="text-decoration:none; color: white; font-size:x-large ; font-family: 'Times New Roman';">ACCES ADMINISTRATEUR</a>
+	</div>
 	
 	<jsp:include page="/footer.jsp"/>
 	
