@@ -35,6 +35,10 @@
 		style="border: 1px black solid; width: 15%; text-align: center; float: left;">
 		<ul
 			style="text-align: left; list-style: none; padding-bottom: 100px; padding-top: 80px;">
+			<li style="margin-bottom: 15px;"><a
+					style="text-decoration: none; color: black;"
+					href="${pageContext.request.contextPath}/listListe">Tous produits</a>
+			</li>
 			<c:forEach items="${categorieAttribute}" var="cat">
 				<li style="margin-bottom: 15px;"><a
 					style="text-decoration: none; color: black;"
@@ -46,11 +50,11 @@
 	
 	<div
 		style="border: 1px black; width: 45%; text-align: left; float: left; margin-left: 120px;">
-		<form:form method="get" action="${pageContext.request.contextPath}/ListProdKW">
+		<form:form method="get" action="${pageContext.request.contextPath}/recherche">
 			<table class="table table-sm">
 				<tr>
 					<td>Recherche par mot cle :</td>
-					<td><input name="mc"  /></td>
+					<td><input name="motclef" type="text" /></td>
 				</tr>
 
 

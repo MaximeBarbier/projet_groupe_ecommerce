@@ -144,7 +144,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 	public void supprimerProduit(Long idP) {
 		
 		Produit prod = em.find(Produit.class, idP);
-		em.remove(prod);	
+		em.remove(prod);
 	}
 
 	@Override

@@ -46,7 +46,7 @@ public class InternauteController {
 		List<Produit> produits = internauteBoutique.getListproduits();
 		model.addAttribute("produitsAttribute", produits);
 
-		model.addAttribute("KWAttribute", " ");
+		model.addAttribute("motclef", " ");
 		
 		
 		return "internaute";
@@ -65,15 +65,13 @@ public class InternauteController {
 		Categorie cat = internauteBoutique.getCategorie(idcat);
 		List<Produit> listeProduits = Collections.emptyList();
 		listeProduits = cat.getProduits();
-		model.addAttribute("listProduitAttribute", listeProduits);
+		model.addAttribute("produitsAttribute", listeProduits);
 
 		List<Categorie> listeCategories = Collections.emptyList();
 		listeCategories = internauteBoutique.getListCategories();
 		model.addAttribute("categorieAttribute", listeCategories);
 
-		Produit produit = new Produit();
-
-		return "afficherProduitParCategorie";
+		return "internaute";
 	}
 
 	/**
@@ -81,15 +79,14 @@ public class InternauteController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/afficherProdParMotCle", method = RequestMethod.GET)
-	public String afficherProdByKeyWord(@RequestParam(required = true, value = "mc") String mc, Model model) {
+	@RequestMapping(value = "/recherche", method = RequestMethod.GET)
+	public String afficherProdByKeyWord(@RequestParam(required = true, name = "motclef") String mc, Model model) {
+			
+		List<Produit> listeProdByKeyWord = internauteBoutique.getProduitsParMotCle(mc);
+		model.addAttribute("produitsAttribute", listeProdByKeyWord);
+		model.addAttribute("motclef", " ");
 		
-		List<Produit> listeProdByKeyWord = Collections.emptyList();		
-		listeProdByKeyWord = internauteBoutique.getProduitsParMotCle(mc);
-		model.addAttribute("afficherProdParMotAttribute", listeProdByKeyWord);
-		model.addAttribute("KWAttribute", mc);
-		
-		return "afficherProdParMotCle";
+		return "internaute";
 
 	}
 	

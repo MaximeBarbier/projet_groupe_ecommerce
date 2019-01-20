@@ -1,6 +1,5 @@
 package com.intiformation.gestion.commerce.bean;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +32,7 @@ public class Produit {
 	@Column(name="selectionne")
 	private boolean selectionne;
 	
-	@ManyToOne (cascade= CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="categorie_id", referencedColumnName="id_categorie") 
 	private Categorie categorie;
 	/*_______________________________________les ctors_______________________________________________*/
