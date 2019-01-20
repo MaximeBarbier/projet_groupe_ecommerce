@@ -108,7 +108,7 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 		//On créé une query où l'on met un paramètre avec un LIKE sur la désignation du produit
 		Query query = em.createQuery("SELECT p FROM produit p WHERE p.designation LIKE :motClef");
 		
-		//On met le mot clef en paramètre en ajoutant '%' devant et derrière pour rechercher toute les 		désignations contenant le mot clef
+		//On met le mot clef en paramètre en ajoutant '%' devant et derrière pour rechercher toute les désignations contenant le mot clef
 		query.setParameter("motClef", "%" + mc + "%");
 		return query.getResultList();
 	}

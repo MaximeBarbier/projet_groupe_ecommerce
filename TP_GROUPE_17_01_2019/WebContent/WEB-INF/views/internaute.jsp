@@ -46,7 +46,7 @@
 	
 	<div
 		style="border: 1px black; width: 45%; text-align: left; float: left; margin-left: 120px;">
-		<form:form method="get" action="${pageContext.request.contextPath}/afficherProdParMotClé">
+		<form:form method="get" action="${pageContext.request.contextPath}/ListProdKW">
 			<table class="table table-sm">
 				<tr>
 					<td>Recherche par mot cle :</td>
