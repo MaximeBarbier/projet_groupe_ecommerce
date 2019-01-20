@@ -44,10 +44,9 @@
 
 	<div
 		style="border: 1px black; width: 45%; text-align: left; float: left; margin-left: 120px;">
-		<form:form method="post" modelAttribute="catVide">
+		<form:form method="post" modelAttribute="categorie">
 			<table class="table table-sm">
-				<tr>
-					<td>ID Categorie :</td>
+				<tr id="ID Categorie" >
 					<td><form:hidden path="idCategorie" /></td>
 				</tr>
 				<tr>
@@ -60,7 +59,7 @@
 				</tr>
 				<tr>
 					<td>Photo :</td>
-					<td><input type="file" /></td>
+					<td><form:input path="photo"/></td>
 				</tr>
 				<tr>
 					<td style="text-align: center;" colspan="2"><input type="submit" value="Enregistrer"></td>
@@ -73,7 +72,7 @@
 	<br/>
 
 	<div style="width: 50%; margin-left: 350px;">
-		<table cellspacing="0" cellpadding="6" border="1" width="50%" class="table table-striped">
+		<table cellspacing="0" cellpadding="6" border="1" width="50%" class="table table-striped" >
 			<tr>
 				<th>ID</th>
 				<th>NOM CAT</th>
@@ -82,13 +81,13 @@
 				<th>Supprimer</th>
 				<th>Editer</th>
 			</tr>
-
+			
 			<c:forEach items="${categoriesAttribute}" var="cat">
 				<tr>
 					<td>${cat.idCategorie}</td>
 					<td>${cat.nomCategorie}</td>
 					<td>${cat.description}</td>
-					<td>${cat.photo}</td>
+					<td><img alt="bug d'affichage" src="${pageContext.request.contextPath}/images/panier.jpg"/></td>
 					<td><a
 						href="${pageContext.request.contextPath}/deleteCategorie?idcat=${cat.idCategorie}">Supprimer</a>
 					</td>

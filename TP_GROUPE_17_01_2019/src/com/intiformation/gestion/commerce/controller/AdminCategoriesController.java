@@ -41,7 +41,7 @@ public class AdminCategoriesController {
 		model.addAttribute("categoriesAttribute", categories);
 		
 		Categorie cat = new Categorie();
-		model.addAttribute("catVide", cat);
+		model.addAttribute("categorie", cat);
 		
 		return "categories";
 	}
@@ -61,67 +61,61 @@ public class AdminCategoriesController {
 		model.addAttribute("categoriesAttribute", categories);
 		
 		Categorie cat = new Categorie();
-		model.addAttribute("catVide", cat);
+		model.addAttribute("categorie", cat);
 		
 		return "redirect:/listCat";
 	}	
 
-//	@RequestMapping(value="/save", method=RequestMethod.POST)
-//	public String saveCat(@ModelAttribute("cat") Categorie cat ) {
-//		
-//		iAdminCategoriesMetier.addCategorie(cat);
-//		
-//		return "redirect:/listCategories";
-//		
-//	}
-//	
-//	
-//	
-//	
-//	
-//	/**
-//	 * afficher le formulaire en réponse à une requête GET pour la modification
-//	 * 
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/updatecategorieform", method = RequestMethod.GET)
-//	public ModelAndView setUpFormulaireUpdate(@RequestParam("catid") long pIdcategorie) {
-//		
-//		//1. recup du fonctionnaire de la bdd (c'est l'objet de commande)
-//		Categorie categorie = iAdminCategoriesMetier.getCategorie(pIdcategorie);
-//		
-//		return new ModelAndView("editCategorie","categorieUpCommand", categorie);
-//	}
-//	
-//	
-//	
-//	
-//	/**
-//	 * modifier une cat
-//	 * @param model
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/updatecategorie", method = RequestMethod.POST)
-//	public String updateCategorie( @ModelAttribute("categorieUpCommand") Categorie pcategorie,
-//			                           Model model) {
-//		
-//		//modif
-//		iAdminCategoriesMetier.editCategorie(pcategorie);
-//		
-//
-//		// recup les fonctionnaires de la bdd + renvoi des données vers
-//		// fonctionnaires.jsp
-//		model.addAttribute("categoriesAttribute", iAdminCategoriesMetier.getListCategories());
-//		
-//
-//		// redirection vers fonctionnaires.jsp
-//		return "redirect:/listCategories";
-//	}
-//	
-//	
-//
-//	
-//	
+	@RequestMapping(path="/listCat", method=RequestMethod.POST)
+	public String saveCat(@ModelAttribute("categorie") Categorie cat, Model model) {
+		
+		adminCategorie.addCategorie(cat);
+		
+		List<Categorie> categories = adminCategorie.getListCategories();
+		model.addAttribute("categoriesAttribute", categories);
+		
+		Categorie cat1 = new Categorie();
+		model.addAttribute("catVide", cat1);
+		
+		return "redirect:/listCat";
+		
+	}
+	
+	/**
+	 * afficher le formulaire en réponse à une requête GET pour la modification
+	 * 
+	 * @return
+	 */
+	@RequestMapping(path = "/updatecategorieform*", method = RequestMethod.GET)
+	public ModelAndView setUpFormulaireUpdate(@RequestParam("catid") long pIdcategorie) {
+		
+		//1. recup du fonctionnaire de la bdd (c'est l'objet de commande)
+		Categorie categorie = adminCategorie.getCategorie(pIdcategorie);
+		
+		return new ModelAndView("editCategorie","categorieUpCommand", categorie);
+	}
+
+	/**
+	 * modifier une cat
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(path = "/updatecategorieform*", method = RequestMethod.POST)
+	public String updateCategorie(@ModelAttribute("categorieUpCommand") Categorie categorie,
+			                       Model model) {
+		
+		//modif
+		adminCategorie.editCategorie(categorie);
+		
+
+		List<Categorie> categories = adminCategorie.getListCategories();
+		model.addAttribute("categoriesAttribute", categories);
+		
+		Categorie cat = new Categorie();
+		model.addAttribute("categorie", cat);
+		
+		return "categories";
+	}
 //	
 //	/**
 //	 * Méthode pour afficher la photo
@@ -135,28 +129,5 @@ public class AdminCategoriesController {
 //		
 //		return photoController;
 //	}
-//	
-//	
-//	
-//	/**
-//	 * ajout d'une cat a la bdd
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/addCat", method = RequestMethod.POST)
-//	public String addCategorie (@ModelAttribute("categorieCommand") 
-//    							@Validated Categorie pcategorie) {
-//		
-//		//ajout d'une categorie
-//		iAdminCategoriesMetier.addCategorie(pcategorie);
-//
-//
-//		return "redirect:/listCategories";
-//		
-//	}
-	
-	
-
-		
-
 
 }
