@@ -2,19 +2,25 @@ package com.intiformation.gestion.commerce.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.intiformation.gestion.commerce.metier.EBoutiqueMetierImpl;
 import com.intiformation.gestion.commerce.metier.IAdminProduitMetier;
+import com.intiformation.springmvc.entity.Fonctionnaire;
 import com.intiformation.gestion.commerce.bean.Categorie;
 import com.intiformation.gestion.commerce.bean.Produit;
 
@@ -49,6 +55,33 @@ public class AdminProduitsController {
 		
 		return "produits";
 	}
+	/**
+	 * afficher le formulaire en réponse à une requête GET
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/produit/addproduitform", method = RequestMethod.GET)
+	public ModelAndView setUpFormulaireAjout() {
+
+		/* /// Données à retourner vers la vue /// */
+
+		Map<String, Object> data = new HashMap<>();
+
+		// 1.définition de l'objet de commande
+		Produit produit = new Produit();
+
+		// 2.définition du nom de l’objet de commande
+		String objetDeCommandeProduit = "produitCommand";
+
+		// 3.association du nom à l'objet
+		data.put(objetDeCommandeProduit, produit);
+
+		/* /// le nom logique de la vue /// */
+		String viewName = "ajouterProduit";
+
+		return new ModelAndView(viewName, data);
+	}
+
 	
 	
 	
@@ -59,14 +92,38 @@ public class AdminProduitsController {
 	 * @return
 	 */
 	@RequestMapping(path="/save", method=RequestMethod.POST)
-	public String saveProd(@ModelAttribute("prodVide") Produit prod,
-							// la methode addProduit a besoin de l'idCategorie, mais je ne sais pas comment le recup seul.
-							// l'idCategorie se trouve deja dans le formulaire d'ajout d'un produit
-						   @RequestParam(required=true, value="idCat")long catID) {
+	public String saveProd(
+			                @ModelAttribute("produitCommand") Produit prod,
+			                @Validated Produit pProduit,
+			                ModelMap modele, BindingResult result) {
 	
-		iAdminProduitMetier.addProduit(prod, catID);
-		
-		return "redirect:/listProd";
+		//validation du champs à l'ajout
+				//result de type BindingResult : contiens les resultats du process de  la validations 
+				
+				validator.validate(pProduit, result);
+				
+				if (result.hasErrors()) {
+					
+					/*détection d'erreurs lors de la validation*/
+					
+					//--> redirection vers ajouterProduit.jsp
+					return "ajouterProduit";
+					
+				}else {
+					
+					/*pas d'erreurs de validation*/ 
+					
+					// ajout du produit
+					i.ajouterFonctionnaire(pFonctionnaire);
+
+					// recup des produits  de la bdd + renvoi des données vers
+					// produits.jsp
+					modele.addAttribute("produitsAttribute", iAdminProduitMetier.getListproduits());
+
+					// redirection vers produits.jsp
+					return "produits";
+				}
+			}
 		
 	}
 	
