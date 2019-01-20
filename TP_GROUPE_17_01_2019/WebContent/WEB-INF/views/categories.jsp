@@ -36,9 +36,9 @@
 	<div
 		style="border: 1px black solid; width: 15%; text-align: center; float: left;">
 		<ul style="text-align: left; list-style: none; padding-bottom: 100px; padding-top: 80px;">
-			<li style="margin-bottom:15px;">Menu</li>
-			<li style="margin-bottom:15px;" ><a style="text-decoration: none; color: black;" href="/listeProduits">Produits</a></li>
-			<li style="margin-bottom:15px;"><a style="text-decoration: none; color: black;" href="/listCategories">Categories</a></li>
+			<li style="margin-bottom:15px; border: 1px; color: brown; font-size: larger;">Menu</li>
+			<li style="margin-bottom:15px;" ><a style="text-decoration: none; color: black;" href="${pageContext.request.contextPath}/listProd">Produits</a></li>
+			<li style="margin-bottom:15px;"><a style="text-decoration: none; color: black;" href="${pageContext.request.contextPath}/listCat">Categories</a></li>
 		</ul>
 	</div>
 

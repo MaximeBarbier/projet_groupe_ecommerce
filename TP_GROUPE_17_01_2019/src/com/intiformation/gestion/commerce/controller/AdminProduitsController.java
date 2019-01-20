@@ -58,7 +58,7 @@ public class AdminProduitsController {
 	 * @param idCat
 	 * @return
 	 */
-	@RequestMapping(value="/save", method=RequestMethod.POST)
+	@RequestMapping(path="/save", method=RequestMethod.POST)
 	public String saveProd(@ModelAttribute("prodVide") Produit prod,
 							// la methode addProduit a besoin de l'idCategorie, mais je ne sais pas comment le recup seul.
 							// l'idCategorie se trouve deja dans le formulaire d'ajout d'un produit
@@ -77,7 +77,7 @@ public class AdminProduitsController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/deleteProd", method=RequestMethod.GET)
+	@RequestMapping(path="/deleteProd", method=RequestMethod.GET)
 	public String produitDelete(@RequestParam(required=true, value="idProd")long prodID) {
 		
 		//Produit produit = iAdminProduitMetier.getProduct(prodID);
@@ -94,16 +94,20 @@ public class AdminProduitsController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/editProd", method=RequestMethod.GET)
+	@RequestMapping(path="/editProd", method=RequestMethod.GET)
 	//produitAttribute se trouve dans le formulaire de la page editProduit.jsp
 	public String chargementProduitFormulaire(@RequestParam(required=true, value="idProd")long prodID, Model model) {
 		
 		Produit produit = iAdminProduitMetier.getProduct(prodID);
 		
+		
+		//iAdminProduitMetier.editProduit(produit);
 		model.addAttribute("produitAttribute", produit);
 		
+		
+		
 		// vue : /WEb-INF/views/editProduit.jsp
-		return "editProduit";			
+		return "editProd";			
 	}
 	
 	
@@ -113,7 +117,7 @@ public class AdminProduitsController {
 	 * @param message
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(path="/saveEditProd", method=RequestMethod.POST)
 	//produitAttribute se trouve dans le formulaire de la page editProduit.jsp
 	public String modifProduit(@ModelAttribute("produitAttribute") Produit produit) {
 		
@@ -128,7 +132,7 @@ public class AdminProduitsController {
 	 * chargement de la liste déroulante des categories 
 	 * @return
 	 */
-	@ModelAttribute("ListeCaterogies")
+	@ModelAttribute("ListCategories")
 	public List<Categorie> categoriesList(){
 		
 		List<Categorie> listeCategories = new ArrayList<>();
