@@ -89,22 +89,7 @@ public class InternauteController {
 		return "internaute";
 
 	}
-	
-	
-	/**
-	 * afficher les produits d'une catégorie
-	 * @param idcat
-	 * @param model
-	 */
-//	@RequestMapping(value="/afficherCategorieParId", method=RequestMethod.GET)
-//	public String afficherCatParId(@RequestParam(required=true, value="idcat") Long idcat, Model model) {
-//		
-//		Categorie cat = iInternauteBoutique.getCategorie(idcat);
-//		model.addAttribute("categoriesAttribute", cat);
-//		
-//		return "afficherCategorieParId";
-//	}
-	
+		
 	/**
 	 * consulter les produits sélectionnés
 	 */
@@ -119,20 +104,6 @@ public class InternauteController {
 //		return "afficherProdSelectionnes";
 //	}
 	
-	/**
-	 * afficher les produits par mot-clé
-	 * @return
-	 */
-//	@RequestMapping(value="/afficherProdParMotClé", method=RequestMethod.GET)
-//	public String afficherProdByKeyWord(@RequestParam(required=true, value="mc") String mc, Model model) {
-//		
-//		List<Produit> listeProdByKeyWord = Collections.emptyList();
-//		listeProdByKeyWord = iInternauteBoutique.getProduitsParMotCle(mc);
-//		model.addAttribute("afficherProdParMotClé", listeProdByKeyWord);
-//		
-//		return "afficherProdParMotClé";
-//		
-//	}
 	
 	/**
 	 * ajouter un produit au panier avec la quantite
