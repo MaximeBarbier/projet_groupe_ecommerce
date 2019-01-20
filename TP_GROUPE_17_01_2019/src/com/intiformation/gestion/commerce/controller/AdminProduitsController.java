@@ -200,7 +200,19 @@ public class AdminProduitsController {
 	}
 	
 	
-	
+	/**
+	 * Afficher les produits par mot clé
+	 */
+	@RequestMapping(path="/ListProdKW", method=RequestMethod.GET)
+	public List<Produit> produitsListKeyWord(@ModelAttribute("produitMotCle") String mc){
+		
+		List<Produit> listProduits = new ArrayList<>();
+		
+		listProduits = iAdminProduitMetier.getProduitsParMotCle(mc);
+		
+		return listProduits;
+		
+	}
 	
 
 }

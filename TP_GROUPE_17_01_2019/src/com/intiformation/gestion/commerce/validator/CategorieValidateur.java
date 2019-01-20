@@ -1,4 +1,4 @@
-package com.intiformation.gestion.commerce.validateur;
+package com.intiformation.gestion.commerce.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
