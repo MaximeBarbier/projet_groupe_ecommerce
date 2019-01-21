@@ -133,4 +133,16 @@ public class EBoutiqueMetierImpl implements IAdminCategoriesMetier{
 	public void deleteProdPanier(Long idP) {
 		boutiqueDAO.supprimerProduit(idP);
 	}// A VOIR
+
+	@Override
+	public List<String> findListNomCategorie() {
+		
+		return boutiqueDAO.listNomCategorie();
+	}
+
+	@Override
+	public Categorie findCategorieByName(String name) {
+		
+		return boutiqueDAO.getCategorieByName(name);
+	}
 }

@@ -59,15 +59,11 @@
 			<form:form method="post" modelAttribute="prodVide">
 				<table>
 					<tr>
-						<td> ID Produit :</td>
-						<td><form:hidden  path="idProduit" /></td>
-					</tr>
-					<tr>
 						<td>Categories</td>			
 						<td> 
-							<form:select path="categorie" >
-								<!--<form:option value="NONE" label="-------- Select --------"/>-->
-								<form:options items="${listCategories}" itemValue="idCategorie" itemLabel="nomCategorie"/>
+							<form:select path="categorie.nomCategorie" >
+								<form:option value="NONE" label="-------- Select --------"/>
+								<form:options items="${ListCategories}"/>
 							</form:select> 
 						</td>
 					</tr>					

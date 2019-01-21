@@ -16,6 +16,10 @@ public interface IBoutiqueDAO {
 	
 	public List<Categorie> listCategories();
 	
+	public List<String> listNomCategorie();
+	
+	public Categorie getCategorieByName(String name);
+	
 	public Categorie getCategorie(Long idCat);
 	
 	public void supprimerCategorie(Long idcat);

@@ -191,4 +191,22 @@ public class BoutiqueDAOImpl implements IBoutiqueDAO{
 		
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public List<String> listNomCategorie() {
+		
+		Query query = em.createQuery("SELECT c.nomCategorie FROM categorie c");
+		return query.getResultList();
+		
+	}
+
+	@Override
+	public Categorie getCategorieByName(String name) {
+		
+		Query query = em.createQuery("SELECT c FROM categorie c WHERE c.nomCategorie = ?1");
+		query.setParameter(1, name);
+		
+		return (Categorie) query.getSingleResult();		
+	}
+
 }

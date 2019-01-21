@@ -36,25 +36,27 @@ public class AdminProduitsController {
 		super();
 		this.iAdminProduitMetier = iAdminProduitMetier;
 	}
-	
-	
-	
+
 	/**
-	 * Méthode index pour afficher la liste des produits 
+	 * Méthode index pour afficher la liste des produits
 	 * 
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.GET,  path="/listProd")
+	@RequestMapping(method = RequestMethod.GET, path = "/listProd")
 	public String generateList(Model model) {
-		
+
 		List<Produit> produits = iAdminProduitMetier.getListproduits();
 		model.addAttribute("produitsAttribute", produits);
-		
+
 		Produit prod = new Produit();
 		model.addAttribute("prodVide", prod);
-		
+
+		// List<String> listName = iAdminProduitMetier.findListNomCategorie();
+		// model.addAttribute("listNameCategories", listName);
+
 		return "produits";
 	}
+
 	/**
 	 * afficher le formulaire en réponse à une requête GET
 	 * 
@@ -82,137 +84,100 @@ public class AdminProduitsController {
 		return new ModelAndView(viewName, data);
 	}
 
-	
-	
-	
 	/**
 	 * Méthode pour ajouter un produit dans une catégorie
+	 * 
 	 * @param prod
 	 * @param idCat
 	 * @return
 	 */
-	@RequestMapping(path="/save", method=RequestMethod.POST)
-	public String saveProd(
-			                @ModelAttribute("produitCommand") Produit prod, Long idProd,
-			                @Validated Produit pProduit,
-			                ModelMap modele, BindingResult result) {
-	
-		//validation du champs à l'ajout
-				//result de type BindingResult : contient les resultats du process de  la validation 
-				
-				ProduitValidateur validator = new ProduitValidateur();
-				validator.validate(pProduit, result);
-				
-				if (result.hasErrors()) {
-					
-					/*détection d'erreurs lors de la validation*/
-					
-					//--> redirection vers liste des produits
-					return "redirect:/listProd";
-					
-				}else {
-					
-					/*pas d'erreurs de validation*/ 
-					
-					// ajout du produit
-					iAdminProduitMetier.addProduit(prod,idProd);
-					// recup des produits  de la bdd + renvoi des données vers
-					// produits.jsp
-					modele.addAttribute("produitsAttribute", iAdminProduitMetier.getListproduits());
+	@RequestMapping(path = "/save", method = RequestMethod.POST)
+	public String saveProd(@ModelAttribute("produitCommand") Produit prod, Model modele) {
 
-					// redirection vers produits.jsp
-					return "produits";
-				}
-			}
-		
-	
-	
-	
+		// validation du champs à l'ajout
+		// result de type BindingResult : contient les resultats du process de la
+		// validation
+
+		/* pas d'erreurs de validation */
+
+		Categorie cat = iAdminProduitMetier.findCategorieByName(prod.getCategorie().getNomCategorie());
+		prod.setCategorie(cat);
+		// ajout du produit
+		iAdminProduitMetier.addProduit(prod, cat.getIdCategorie());
+		// recup des produits de la bdd + renvoi des données vers
+		// produits.jsp
+		modele.addAttribute("produitsAttribute", iAdminProduitMetier.getListproduits());
+
+		// redirection vers produits.jsp
+		return "produits";
+	}
+
 	/**
 	 * supprimmer un produit
+	 * 
 	 * @param prodID
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(path="/deleteProd", method=RequestMethod.GET)
-	public String produitDelete(@RequestParam(required=true, value="idProd")long prodID) {
-		
-		//Produit produit = iAdminProduitMetier.getProduct(prodID);
+	@RequestMapping(path = "/deleteProd", method = RequestMethod.GET)
+	public String produitDelete(@RequestParam(required = true, value = "idProd") long prodID) {
+
+		// Produit produit = iAdminProduitMetier.getProduct(prodID);
 		iAdminProduitMetier.deleteProduit(prodID);
-		//model.addAttribute("produitAttribute", iAdminProduitMetier.getListproduits());
-		
+		// model.addAttribute("produitAttribute",
+		// iAdminProduitMetier.getListproduits());
+
 		return "redirect:/listProd";
 	}
-	
-	
-	
+
 	/**
-	 *  Méthode pour modifier un produit (charger formulaire avec le produit)
+	 * Méthode pour modifier un produit (charger formulaire avec le produit)
+	 * 
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(path="/editProd", method=RequestMethod.GET)
-	//produitAttribute se trouve dans le formulaire de la page editProduit.jsp
-	public String chargementProduitFormulaire(@RequestParam(required=true, value="idProd")long prodID, Model model) {
-		
+	@RequestMapping(path = "/editProd", method = RequestMethod.GET)
+	// produitAttribute se trouve dans le formulaire de la page editProduit.jsp
+	public String chargementProduitFormulaire(@RequestParam(required = true, value = "idProd") long prodID,
+			Model model) {
+
 		Produit produit = iAdminProduitMetier.getProduct(prodID);
-		
-		
-		//iAdminProduitMetier.editProduit(produit);
+
+		// iAdminProduitMetier.editProduit(produit);
 		model.addAttribute("produitAttribute", produit);
-		
-		
-		
+
 		// vue : /WEb-INF/views/editProduit.jsp
-		return "editProd";			
+		return "editProd";
 	}
-	
-	
-	
+
 	/**
 	 * edit le produit de editProduit.jsp
+	 * 
 	 * @param message
 	 * @return
 	 */
-	@RequestMapping(path="/saveEditProd", method=RequestMethod.POST)
-	//produitAttribute se trouve dans le formulaire de la page editProduit.jsp
+	@RequestMapping(path = "/saveEditProd", method = RequestMethod.POST)
+	// produitAttribute se trouve dans le formulaire de la page editProduit.jsp
 	public String modifProduit(@ModelAttribute("produitAttribute") Produit produit) {
-		
-			iAdminProduitMetier.editProduit(produit);
-			
-			return "redirect:/listProd";
-		}
-		
-	
-	
+
+		iAdminProduitMetier.editProduit(produit);
+
+		return "redirect:/listProd";
+	}
+
 	/**
-	 * chargement de la liste déroulante des categories 
+	 * chargement de la liste déroulante des categories
+	 * 
 	 * @return
 	 */
 	@ModelAttribute("ListCategories")
-	public List<Categorie> categoriesList(){
-		
-		List<Categorie> listeCategories = new ArrayList<>();
-		
-		listeCategories = iAdminProduitMetier.getListCategories();
-		
+	public List<String> categoriesList() {
+
+		List<String> listeCategories = new ArrayList<>();
+
+		listeCategories = iAdminProduitMetier.findListNomCategorie();
+
 		return listeCategories;
 	}
-	
-	
-	/**
-	 * Afficher les produits par mot clé
-	 */
-	@RequestMapping(path="/ListProdKW", method=RequestMethod.GET)
-	public List<Produit> produitsListKeyWord(@ModelAttribute("produitMotCle") String mc){
-		
-		List<Produit> listProduits = new ArrayList<>();
-		
-		listProduits = iAdminProduitMetier.getProduitsParMotCle(mc);
-		
-		return listProduits;
-		
-	}
-	
 
 }
