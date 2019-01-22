@@ -51,8 +51,8 @@ public class AdminProduitsController {
 		Produit prod = new Produit();
 		model.addAttribute("prodVide", prod);
 
-		// List<String> listName = iAdminProduitMetier.findListNomCategorie();
-		// model.addAttribute("listNameCategories", listName);
+		 List<String> listName = iAdminProduitMetier.findListNomCategorie();
+		 model.addAttribute("listNameCategories", listName);
 
 		return "produits";
 	}
@@ -138,13 +138,18 @@ public class AdminProduitsController {
 	 */
 	@RequestMapping(path = "/editProd", method = RequestMethod.GET)
 	// produitAttribute se trouve dans le formulaire de la page editProduit.jsp
-	public String chargementProduitFormulaire(@RequestParam(required = true, value = "idProd") long prodID,
+	public String chargementProduitFormulaire(@ModelAttribute("categorieUpCommand") Produit prod,
 			Model model) {
-
-		Produit produit = iAdminProduitMetier.getProduct(prodID);
+		
+		iAdminProduitMetier.editProduit(prod);
+		
+		List<Produit> produits = iAdminProduitMetier.getListproduits();
 
 		// iAdminProduitMetier.editProduit(produit);
-		model.addAttribute("produitAttribute", produit);
+		model.addAttribute("produitAttribute", produits);
+		
+		Produit p = new Produit();
+		model.addAttribute("produit", p);
 
 		// vue : /WEb-INF/views/editProduit.jsp
 		return "editProd";
