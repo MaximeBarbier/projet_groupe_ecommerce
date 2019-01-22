@@ -29,7 +29,11 @@
 		<a href="${pageContext.request.contextPath}/listCat" style="text-decoration:none; color: white; font-size:x-large ; font-family: 'Times New Roman';">ACCES ADMINISTRATEUR</a>
 	</div>
 	
+	<img src="images/panier.jpg" />
+	
 	<jsp:include page="/footer.jsp"/>
+	
+	
 	
 </body>
 </html>
