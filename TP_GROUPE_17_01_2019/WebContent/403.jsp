@@ -28,7 +28,7 @@
 
 	<jsp:include page="/header.jsp" />
 
-	<div style="border: 1px black; width: 45%; text-align: left; margin-left: 500px;">
+	<div style="border: 1px black; width: 45%; text-align: center; margin-left: 400px;">
 		<h2>Acces refusé</h2>
 
 		<s:authorize access="hasRole('ROLE_ADMIN_PROD')">
@@ -38,6 +38,7 @@
 				Connectez-vous avec vos identifiants admin catégorie : <a
 					href="${pageContext.request.contextPath}/login.jsp">Login</a>
 			</h4>
+			<h6><a class="btn btn-dark" href="${pageContext.request.contextPath}/index.jsp">Page d'accueil</a></h6>
 
 		</s:authorize>
 	</div>

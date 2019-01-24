@@ -29,6 +29,7 @@
 
 	<jsp:include page="/header.jsp" />
 
+	<a class="btn btn-dark" style="float: right; margin-right: 30px" href="${pageContext.request.contextPath}/index.jsp">Page d'accueil</a>
 
 	<div
 		style="border: 1px black; width: 45%; text-align: left; margin-left: 600px;">
@@ -44,6 +45,7 @@
 			<font color="red"> Login error. <br /> Reason:
 				${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 			</font>
+			
 		</c:if>
 
 
@@ -63,10 +65,6 @@
 					<td><input type="text" name="password" /></td>
 				</tr>
 				<tr>
-					<td align="right">Remember Me:</td>
-					<td><input type="checkbox" name="remember_me" /></td>
-				</tr>
-				<tr>
 					<td colspan="2" align="right"><input type="submit"
 						name="Login" /> <input type="reset" name="Reset" /></td>
 				</tr>
@@ -74,12 +72,9 @@
 			</table>
 
 		</form>
-
-
-		<!-- lien vers la page d'accueil après la déconnexion -->
+	
 		<c:if test="${not empty param.logout_message}">
-			<font color="red"> <a
-				href="${pageContext.request.contextPath}/index.jsp">Page d'accueil</a>
+			<font color="red">
 			</font>
 		</c:if>
 

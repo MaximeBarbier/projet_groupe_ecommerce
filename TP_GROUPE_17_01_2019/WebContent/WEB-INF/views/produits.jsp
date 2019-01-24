@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
-    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
-   
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-    <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
-    
+	pageEncoding="ISO-8859-1"%>
+
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,114 +34,116 @@
 </head>
 <body style="background-color: #FFFFF0;">
 
-<jsp:include page="/header.jsp" />
+	<jsp:include page="/header.jsp" />
 
 	<div
 		style="border: 1px black solid; width: 15%; text-align: center; float: left;">
-		<ul style="text-align: left; list-style: none; padding-bottom: 100px; padding-top: 80px;">
-			<li style="margin-bottom:15px; border: 1px; color: brown; font-size: larger;">Menu</li>
-			<li style="margin-bottom:15px;" ><a style="text-decoration: none; color: black;" href="${pageContext.request.contextPath}/listProd">Produits</a></li>
-			<li style="margin-bottom:15px;"><a style="text-decoration: none; color: black;" href="${pageContext.request.contextPath}/listCat">Categories</a></li>
+		<ul
+			style="text-align: left; list-style: none; padding-bottom: 100px; padding-top: 80px;">
+			<li
+				style="margin-bottom: 15px; border: 1px; color: brown; font-size: larger;">Menu</li>
+			<li style="margin-bottom: 15px;"><a
+				style="text-decoration: none; color: black;"
+				href="${pageContext.request.contextPath}/listProd">Produits</a></li>
+			<li style="margin-bottom: 15px;"><a
+				style="text-decoration: none; color: black;"
+				href="${pageContext.request.contextPath}/listCat">Categories</a></li>
 		</ul>
 	</div>
-	
+
 	<div style="width: 15%; text-align: center; float: right;">
 		<s:authorize access="hasAnyRole('ROLE_ADMIN_PROD', 'ROLE_ADMIN_CAT')">
-			<a href="<c:url value="/logout"/>">Logout</a>
+			<a class="btn btn-danger" href="<c:url value="/logout"/>">Logout</a>
 		</s:authorize>
 	</div>
 
 
-	<section style="border: 1px black;">
-	
-		<!-- Division formulaire -->
-		<div style="border: 1px black; width: 45%; text-align: left; float: left; margin-left: 120px;">	
-		
-			<!-- Formulaire d'ajout de produit -->
-			<form:form method="post" modelAttribute="prodVide">
-				<table>
-					<tr>
-						<td>Categories</td>			
-						<td> 
-							<form:select path="categorie" >
-								<form:option value="NONE" label="-------- Select --------"/>
-								<form:options items="${ListCategories}"/>
-							</form:select> 
-						</td>
-					</tr>					
-					<tr>
-						<td>Designation :</td>
-						<td><form:input path="designation"/></td>
-					</tr>					
-					<tr>
-						<td>Description :</td>
-						<td><form:textarea path="description"/></td>
-					</tr>					
-					<tr>
-						<td>Prix :</td>
-						<td><form:input path="prix"/> </td>
-					</tr>
-					<tr>
-						<td>Quantité :</td>
-						<td><form:input path="quantite"/></td>
-					</tr>
-					<tr>
-						<td>Photo :</td>
-						<td><form:input type="file" path="photo"/></td>
-					</tr>					
-					<tr>
-						<td style="text-align: center;" colspan="2" height="10"> <input type="submit" value="Enregistrer"></td>
-						
-					</tr>
-				</table>
-			</form:form>
-		</div>
-		
-	
-		
-		<!-- Affichage des produits -->
-		<div  style="width: 50%; margin-left: 50px;">
-	
-			<table cellspacing="0" cellpadding="6" border="1" width="50%" class="table table-striped">
-				<tr  >
-					<th>ID</th>
-					<th>Designation</th>
-					<th>Prix</th>
-					<th>Selectionné</th>
-					<th>Quantité</th>
-					<th>Photo</th>
-					<th>Suppression</th>
-					<th>Edition</th>
-		
-					
+
+	<!-- Division formulaire -->
+	<div
+		style="border: 1px black; width: 45%; text-align: left; float: left; margin-left: 290px;">
+
+		<!-- Formulaire d'ajout de produit -->
+		<form:form method="post" modelAttribute="prodVide">
+			<table style="text-align: center">
+				<tr>
+					<td>Categories</td>
+					<td><form:select path="categorie">
+							<form:option value="NONE" label="-------- Select --------" />
+							<form:options items="${ListCategories}" />
+						</form:select></td>
 				</tr>
-				
-				<c:forEach items="${produitsAttribute}" var="prod">
-					<tr>
-						<td>${prod.idProduit}</td>
-						<td>${prod.designation}</td>
-						<td>${prod.prix}</td>
-						<td>${prod.selectionne}</td>
-						<td>${prod.quantite}</td>
-						<td><img src="${prod.photo}"></td>
-						<td>
-							<a href="${pageContext.request.contextPath}/deleteProd?idProd=${prod.idProduit}">Supprimer</a>
-						</td>
-						<td>
-						 	<a rel="editProduit.jsp" href="${pageContext.request.contextPath}/editProd?idProd=${prod.idProduit}">Editer</a>
-						</td>	
-					</tr>
-				</c:forEach>	
+				<tr>
+					<td>Designation :</td>
+					<td><form:input path="designation" /></td>
+				</tr>
+				<tr>
+					<td>Description :</td>
+					<td><form:textarea path="description" /></td>
+				</tr>
+				<tr>
+					<td>Prix :</td>
+					<td><form:input path="prix" /></td>
+				</tr>
+				<tr>
+					<td>Quantité :</td>
+					<td><form:input path="quantite" /></td>
+				</tr>
+				<tr>
+					<td>Photo :</td>
+					<td><form:input type="file" path="photo" /></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;" colspan="2" height="10"><input
+						type="submit" value="Enregistrer"></td>
+
+				</tr>
 			</table>
-		</div>
-		
-		
-	</section>
+		</form:form>
+	</div>
 
-	<footer>
-		
-	</footer>
+	<br/>
+	<br/>
+	<br/>
 
+	<!-- Affichage des produits -->
+	<div style="width: 50%; margin-left: 350px; margin-top:200px">
+
+		<table cellspacing="0" cellpadding="6" border="1" width="50%"
+			class="table table-striped">
+			<tr>
+				<th>ID</th>
+				<th>Designation</th>
+				<th>Prix</th>
+				<th>Selectionné</th>
+				<th>Quantité</th>
+				<th>Photo</th>
+				<th>Suppression</th>
+				<th>Edition</th>
+
+
+			</tr>
+
+			<c:forEach items="${produitsAttribute}" var="prod">
+				<tr>
+					<td>${prod.idProduit}</td>
+					<td>${prod.designation}</td>
+					<td>${prod.prix}</td>
+					<td>${prod.selectionne}</td>
+					<td>${prod.quantite}</td>
+					<td><img src="images/${prod.photo}"></td>
+					<td><a class="btn btn-dark"
+						href="${pageContext.request.contextPath}/deleteProd?idProd=${prod.idProduit}">Supprimer</a>
+					</td>
+					<td><a  class="btn btn-dark" rel="editProduit.jsp"
+						href="${pageContext.request.contextPath}/editProd?idProd=${prod.idProduit}">Editer</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+
+	<jsp:include page="/header.jsp" />
 
 
 

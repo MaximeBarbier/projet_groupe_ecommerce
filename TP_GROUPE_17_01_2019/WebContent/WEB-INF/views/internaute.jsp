@@ -48,6 +48,11 @@
 		</ul>
 	</div>
 	
+	<div style="float: right; margin-right: 50px;">
+		<a class="btn btn-dark" href="${pageContext.request.contextPath}/index.jsp">Page d'accueil</a>
+	</div>
+	
+	
 	<div
 		style="border: 1px black; width: 45%; text-align: left; float: left; margin-left: 120px;">
 		<form:form method="get" action="${pageContext.request.contextPath}/recherche">
@@ -85,7 +90,7 @@
 					<td>${prod.designation}</td>
 					<td>${prod.description}</td>
 					<td>${prod.prix}</td>
-					<td>${prod.photo}</td>
+					<td><img src="images/${prod.photo}"></td>
 				</tr>
 			</c:forEach>
 		</table>

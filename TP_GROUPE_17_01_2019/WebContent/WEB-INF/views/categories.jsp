@@ -45,7 +45,7 @@
 	
 	<div style="width: 15%; text-align: center; float: right;">
 		<s:authorize access="hasAnyRole('ROLE_ADMIN_PROD', 'ROLE_ADMIN_CAT')">
-			<a href="<c:url value="/logout"/>">Logout</a>
+			<a class="btn btn-danger" href="<c:url value="/logout"/>">Logout</a>
 		</s:authorize>
 
 	</div>
@@ -80,7 +80,7 @@
 	<br/>
 
 	<div style="width: 50%; margin-left: 350px;">
-		<table cellspacing="0" cellpadding="6" border="1" width="50%" class="table table-striped" >
+		<table style="text-align: center" cellspacing="0" cellpadding="6" border="1" width="50%" class="table table-striped" >
 			<tr>
 				<th>ID</th>
 				<th>NOM CAT</th>
@@ -95,11 +95,11 @@
 					<td>${cat.idCategorie}</td>
 					<td>${cat.nomCategorie}</td>
 					<td>${cat.description}</td>
-					<td><img alt="bug d'affichage" width="100" height ="100"/>${cat.photo}</td>
-					<td><a
+					<td><img alt="bug d'affichage" src="images/${cat.photo}" /></td>
+					<td><a class="btn btn-dark"
 						href="${pageContext.request.contextPath}/deleteCategorie?idcat=${cat.idCategorie}">Supprimer</a>
 					</td>
-					<td><a
+					<td><a class="btn btn-dark"
 						href="${pageContext.request.contextPath}/updatecategorieform?catid=${cat.idCategorie}">Editer</a>
 					</td>
 				</tr>
