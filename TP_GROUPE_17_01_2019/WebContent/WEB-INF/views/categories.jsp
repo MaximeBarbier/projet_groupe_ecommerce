@@ -4,6 +4,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,6 +42,13 @@
 			<li style="margin-bottom:15px;"><a style="text-decoration: none; color: black;" href="${pageContext.request.contextPath}/listCat">Categories</a></li>
 		</ul>
 	</div>
+	
+	<div style="width: 15%; text-align: center; float: right;">
+		<s:authorize access="hasAnyRole('ROLE_ADMIN_PROD', 'ROLE_ADMIN_CAT')">
+			<a href="<c:url value="/logout"/>">Logout</a>
+		</s:authorize>
+
+	</div>
 
 	<div
 		style="border: 1px black; width: 45%; text-align: left; float: left; margin-left: 120px;">
@@ -59,7 +67,7 @@
 				</tr>
 				<tr>
 					<td>Photo :</td>
-					<td><form:input path="photo"/></td>
+					<td><form:input type="file" path="photo"/></td>
 				</tr>
 				<tr>
 					<td style="text-align: center;" colspan="2"><input type="submit" value="Enregistrer"></td>
@@ -87,7 +95,7 @@
 					<td>${cat.idCategorie}</td>
 					<td>${cat.nomCategorie}</td>
 					<td>${cat.description}</td>
-					<td><img alt="bug d'affichage" src="${pageContext.request.contextPath}/images/panier.jpg"/></td>
+					<td><img alt="bug d'affichage" width="100" height ="100"/>${cat.photo}</td>
 					<td><a
 						href="${pageContext.request.contextPath}/deleteCategorie?idcat=${cat.idCategorie}">Supprimer</a>
 					</td>

@@ -7,17 +7,18 @@
 
 	<sec:http auto-config="true" use-expressions="true">
 
-		<sec:intercept-url pattern="/categories*"
+		<sec:intercept-url pattern="/listCat*"
 			access="hasRole('ROLE_ADMIN_CAT')" />
-		<sec:intercept-url pattern="/produits*"
+		<sec:intercept-url pattern="/listProd*"
 			access="hasAnyRole('ROLE_ADMIN_PROD','ROLE_ADMIN_CAT')" />
 		<sec:intercept-url pattern="/guest*"
 			access="hasRole('ROLE_GUEST')" />
 
-		<sec:form-login login-page="login.jsp"
-			default-target-url="/accueil.jsp"
+		<sec:form-login login-page="/login.jsp"
+			default-target-url="/listProd"
 			authentication-failure-url="/login.jsp?error=true"
-			login-processing-url="/login" username-parameter="username"
+			login-processing-url="/login" 
+			username-parameter="username"
 			password-parameter="password" />
 
 		<sec:remember-me remember-me-parameter="remember-me"
@@ -43,9 +44,9 @@
 
 			<sec:jdbc-user-service
 				data-source-ref="datasourceBean"
-				users-by-username-query="select username,password, actived from member where username=?"
-				authorities-by-username-query="select username,member_role.role as authority from member, member_role
-			where member.username=? and member.id_member=member_role.member_id" />
+				users-by-username-query="select username,password, activated from users where username=?"
+				authorities-by-username-query="select users.username,roles.role_name as authority from users, roles
+			where users.username=? and users.id_user=roles.user_id" />
 
 		</sec:authentication-provider>
 	</sec:authentication-manager>

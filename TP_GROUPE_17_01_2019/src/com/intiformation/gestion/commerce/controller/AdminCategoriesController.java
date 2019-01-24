@@ -66,6 +66,12 @@ public class AdminCategoriesController {
 		return "redirect:/listCat";
 	}	
 
+	/**
+	 * 
+	 * @param cat
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(path="/listCat", method=RequestMethod.POST)
 	public String saveCat(@ModelAttribute("categorie") Categorie cat, Model model) {
 		

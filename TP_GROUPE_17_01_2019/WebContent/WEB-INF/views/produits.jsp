@@ -5,6 +5,8 @@
    
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
+    <%@taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,11 +46,11 @@
 	</div>
 	
 	<div style="width: 15%; text-align: center; float: right;">
-	<s:authorize access="......">
-				<a href='<c:url value="/logout"/>'>Logout</a>
-			</s:authorize>
-	
+		<s:authorize access="hasAnyRole('ROLE_ADMIN_PROD', 'ROLE_ADMIN_CAT')">
+			<a href="<c:url value="/logout"/>">Logout</a>
+		</s:authorize>
 	</div>
+
 
 	<section style="border: 1px black;">
 	
@@ -61,7 +63,7 @@
 					<tr>
 						<td>Categories</td>			
 						<td> 
-							<form:select path="categorie.nomCategorie" >
+							<form:select path="categorie" >
 								<form:option value="NONE" label="-------- Select --------"/>
 								<form:options items="${ListCategories}"/>
 							</form:select> 
@@ -121,7 +123,7 @@
 						<td>${prod.prix}</td>
 						<td>${prod.selectionne}</td>
 						<td>${prod.quantite}</td>
-						<td>${prod.photo}</td>
+						<td><img src="${prod.photo}"></td>
 						<td>
 							<a href="${pageContext.request.contextPath}/deleteProd?idProd=${prod.idProduit}">Supprimer</a>
 						</td>

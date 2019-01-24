@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,20 +21,16 @@
 <body style="background-color: #FFFFF0;">
 	
 	<jsp:include page="/header.jsp"/>	
-		
+	
 		
 	<div style="text-align:center; background-color: black; margin-top: 220px; height:200px; width: 400px; margin-left: 580px; padding-top: 80px;">
 		<a href="${pageContext.request.contextPath}/listListe" style="text-decoration:none; color: white; font-size:x-large ; font-family: 'Times New Roman';">ACCES AU SITE</a>
 	</div>
 	<div style="text-align:center; background-color: black; margin-top: 220px; height:200px; width: 400px; margin-left: 580px; padding-top: 80px;">
-		<a href="${pageContext.request.contextPath}/listCat" style="text-decoration:none; color: white; font-size:x-large ; font-family: 'Times New Roman';">ACCES ADMINISTRATEUR</a>
+		<a href="${pageContext.request.contextPath}/login.jsp" style="text-decoration:none; color: white; font-size:x-large ; font-family: 'Times New Roman';">ACCES ADMINISTRATEUR</a>
 	</div>
 	
-	<img src="images/panier.jpg" />
-	
 	<jsp:include page="/footer.jsp"/>
-	
-	
 	
 </body>
 </html>

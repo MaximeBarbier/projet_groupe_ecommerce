@@ -92,7 +92,7 @@ public class AdminProduitsController {
 	 * @return
 	 */
 	@RequestMapping(path = "/save", method = RequestMethod.POST)
-	public String saveProd(@ModelAttribute("produitCommand") Produit prod, Model modele) {
+	public String saveProd(@ModelAttribute("prodVide") Produit prod, Model modele) {
 
 		// validation du champs à l'ajout
 		// result de type BindingResult : contient les resultats du process de la
@@ -138,21 +138,15 @@ public class AdminProduitsController {
 	 */
 	@RequestMapping(path = "/editProd", method = RequestMethod.GET)
 	// produitAttribute se trouve dans le formulaire de la page editProduit.jsp
-	public String chargementProduitFormulaire(@ModelAttribute("categorieUpCommand") Produit prod,
+	public String chargementProduitFormulaire(@RequestParam("idProd") Long pIDProd,
 			Model model) {
 		
-		iAdminProduitMetier.editProduit(prod);
+		Produit produit = iAdminProduitMetier.getProduct(pIDProd);
 		
-		List<Produit> produits = iAdminProduitMetier.getListproduits();
-
-		// iAdminProduitMetier.editProduit(produit);
-		model.addAttribute("produitAttribute", produits);
+		model.addAttribute("produitAModif", produit);
 		
-		Produit p = new Produit();
-		model.addAttribute("produit", p);
-
-		// vue : /WEb-INF/views/editProduit.jsp
-		return "editProd";
+		return "editProduit";
+		
 	}
 
 	/**
@@ -163,11 +157,17 @@ public class AdminProduitsController {
 	 */
 	@RequestMapping(path = "/saveEditProd", method = RequestMethod.POST)
 	// produitAttribute se trouve dans le formulaire de la page editProduit.jsp
-	public String modifProduit(@ModelAttribute("produitAttribute") Produit produit) {
+	public String modifProduit(@ModelAttribute("produitAModif") Produit produit, Model model) {
 
 		iAdminProduitMetier.editProduit(produit);
 
-		return "redirect:/listProd";
+		Produit prod = new Produit();
+		model.addAttribute("prodVide", prod);
+
+		 List<String> listName = iAdminProduitMetier.findListNomCategorie();
+		 model.addAttribute("listNameCategories", listName);
+
+		return "produits";
 	}
 
 	/**
@@ -177,11 +177,14 @@ public class AdminProduitsController {
 	 */
 	@ModelAttribute("ListCategories")
 	public List<String> categoriesList() {
-
+		
+		//Map<String, Categorie> Categories = new HashMap<>();
 		List<String> listeCategories = new ArrayList<>();
-
+		
 		listeCategories = iAdminProduitMetier.findListNomCategorie();
-
+		
+		
+		
 		return listeCategories;
 	}
 

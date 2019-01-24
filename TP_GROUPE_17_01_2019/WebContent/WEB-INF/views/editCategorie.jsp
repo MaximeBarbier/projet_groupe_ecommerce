@@ -50,7 +50,7 @@
 				<tr>
 					<td>ID Categorie :</td>
 					<td><input type="text" name="idCategorie" value="${categorieUpCommand.idCategorie}"  disabled="disabled"/></td>
-					<td><form:hidden path="idCategorie"/>
+					<td><form:hidden path="idCategorie"/><td/>
 				</tr>
 				<tr>
 					<td>Nom Categorie :</td>
