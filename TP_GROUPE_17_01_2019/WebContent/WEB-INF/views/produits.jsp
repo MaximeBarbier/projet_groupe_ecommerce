@@ -37,7 +37,7 @@
 	<jsp:include page="/header.jsp" />
 
 	<div
-		style="border: 1px black solid; width: 15%; text-align: center; float: left;">
+		style="border: 1px black solid; width: 15%;  float: left;">
 		<ul
 			style="text-align: left; list-style: none; padding-bottom: 100px; padding-top: 80px;">
 			<li

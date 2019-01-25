@@ -6,39 +6,51 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<sec:http auto-config="true" use-expressions="true">
-
+		<!--url accessibles pour chaque role  -->
 		<sec:intercept-url pattern="/listCat*"
 			access="hasRole('ROLE_ADMIN_CAT')" />
 		<sec:intercept-url pattern="/listProd*"
 			access="hasAnyRole('ROLE_ADMIN_PROD','ROLE_ADMIN_CAT')" />
-		<sec:intercept-url pattern="/guest*"
-			access="hasRole('ROLE_GUEST')" />
 
+
+		<!-- <sec:form-login/>: forme la plus simple du formulaire (user/password) -->
+		<!-- - login-page: l'url affichant un formulaire personnalisé de connexion 
+			- default-target-url: l'url vers laquelle le user est redirigé si l'authentification 
+			a réussie - authentication-failure-url: l'url vers laquelle le user est redirigé 
+			si l'authentification a échouée - login-processing-url: url sur laquelle 
+			spring security attend les params d'authentification, par défaut : 'login' 
+			(la valeur de l'attribut action dans le formulaire de connexion) - username-parameter 
+			et password-parameter : valeur de l'attribut name des input dans le formulaire 
+			de connexion -->
 		<sec:form-login login-page="/login.jsp"
 			default-target-url="/listProd"
 			authentication-failure-url="/login.jsp?error=true"
-			login-processing-url="/login" 
-			username-parameter="username"
+			login-processing-url="/login" username-parameter="username"
 			password-parameter="password" />
 
+		<!-- authentificatino automatique -->
 		<sec:remember-me remember-me-parameter="remember-me"
 			token-validity-seconds="45475" />
 
-		<sec:anonymous username="guest"
-			granted-authority="ROLE_GUEST" />
 
+		<!-- déconnexion de l'utilisateur - logout-success-url: url vers laquelle 
+			le user est redirigé après la déconnexion - logout-url: url de déconnexion 
+			(par défaut /logout) - invalidate-session: destruction de la session -->
 		<sec:logout
 			logout-success-url="/login.jsp?logout_message=true"
 			logout-url="/logout" invalidate-session="true" />
 
+		<!-- desactiver la protection contre les attaques CSRF -->
 		<sec:csrf disabled="true" />
 
+		<!-- url de la page lorsque le user va sur une page qu'il n'a pas accès -->
 		<sec:access-denied-handler
 			error-page="/403.jsp" />
 
 
 	</sec:http>
 
+	<!--définition des utilisateurs autorisés avec leur rôle-->
 	<sec:authentication-manager>
 		<sec:authentication-provider>
 

@@ -31,7 +31,7 @@
 	<div style="border: 1px black; width: 45%; text-align: center; margin-left: 400px;">
 		<h2>Acces refusé</h2>
 
-		<s:authorize access="hasRole('ROLE_ADMIN_PROD')">
+
 			<h3>Vous n'avez pas accès à cette section</h3>
 
 			<h4>
@@ -40,7 +40,6 @@
 			</h4>
 			<h6><a class="btn btn-dark" href="${pageContext.request.contextPath}/index.jsp">Page d'accueil</a></h6>
 
-		</s:authorize>
 	</div>
 	<jsp:include page="/footer.jsp" />
 </body>
